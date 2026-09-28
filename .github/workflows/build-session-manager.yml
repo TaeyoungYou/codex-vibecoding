@@ -1,0 +1,58 @@
+name: Build Codex Session Manager
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  package:
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - runner: windows-latest
+            target: win
+          - runner: macos-latest
+            target: mac
+    runs-on: ${{ matrix.runner }}
+    defaults:
+      run:
+        working-directory: session-maanger
+    steps:
+      - name: Check out source
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7
+      - name: Set up Node.js
+        uses: actions/setup-node@820762786026740c76f36085b0efc47a31fe5020 # v7
+        with:
+          node-version: '24'
+          cache: npm
+          cache-dependency-path: session-maanger/package-lock.json
+      - name: Install dependencies (Windows)
+        if: runner.os == 'Windows'
+        run: npm.cmd ci
+      - name: Install dependencies (macOS)
+        if: runner.os == 'macOS'
+        run: npm ci
+      - name: Run parser tests (Windows)
+        if: runner.os == 'Windows'
+        run: npm.cmd test
+      - name: Run parser tests (macOS)
+        if: runner.os == 'macOS'
+        run: npm test
+      - name: Build Windows application
+        if: runner.os == 'Windows'
+        run: npm.cmd run build:win
+      - name: Build macOS application
+        if: runner.os == 'macOS'
+        run: npm run build:mac
+      - name: Upload packages
+        uses: actions/upload-artifact@v4
+        with:
+          name: codex-session-manager-${{ matrix.target }}
+          path: |
+            session-maanger/dist/*.exe
+            session-maanger/dist/*.dmg
+            session-maanger/dist/*.zip
+          if-no-files-found: error

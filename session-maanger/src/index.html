@@ -1,0 +1,61 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self'; img-src 'self' data:; font-src 'self'">
+  <title>Codex Session Manager</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div class="app-shell">
+    <aside class="sidebar" aria-label="세션 목록">
+      <div class="brand">
+        <div class="brand-mark" aria-hidden="true">✦</div>
+        <div><div class="brand-title">Codex Sessions</div><div class="brand-subtitle">YOUR CONVERSATION LIBRARY</div></div>
+      </div>
+
+      <div class="sidebar-heading">
+        <div><span class="eyebrow">LIBRARY</span><h1>내 세션 <span id="session-count">0</span></h1></div>
+        <button id="refresh-button" class="icon-button" type="button" aria-label="새로고침" title="새로고침 (F5)">↻</button>
+      </div>
+
+      <label class="search-box" for="search-input">
+        <span aria-hidden="true">⌕</span>
+        <input id="search-input" type="search" placeholder="대화, 프로젝트, ID 검색" autocomplete="off" aria-label="세션 검색">
+        <kbd>⌘ K</kbd>
+      </label>
+      <div class="list-caption"><span>최근 대화</span><span id="filtered-count"></span></div>
+      <div id="session-list" class="session-list" role="listbox" aria-label="저장된 세션" tabindex="0"></div>
+      <button id="directory-button" class="sidebar-footer" type="button" title="세션 폴더 열기"><span class="status-dot"></span><span id="directory-status">세션을 불러오는 중…</span></button>
+    </aside>
+
+    <main class="content">
+      <div class="topbar"><span class="topbar-path">WORKSPACE <span class="slash">/</span> <strong>SESSION EXPLORER</strong></span><span class="topbar-hint">↑↓ 이동 <span>·</span> Enter 이어서 사용</span></div>
+      <div id="empty-state" class="empty-state" hidden><div class="empty-icon">✦</div><h2>세션을 선택해 주세요</h2><p>왼쪽 목록에서 대화를 선택하면 내용이 여기에 표시됩니다.</p></div>
+      <div id="detail" class="detail" hidden>
+        <header class="detail-header">
+          <div class="detail-heading-row"><span class="eyebrow accent">SELECTED SESSION</span><span id="detail-date" class="detail-date"></span></div>
+          <h2 id="detail-title"></h2>
+          <p id="detail-preview" class="detail-preview"></p>
+          <div class="detail-actions">
+            <button id="resume-button" class="primary-button" type="button"><span aria-hidden="true">↗</span> 이 세션 이어서 사용</button>
+            <button id="copy-button" class="secondary-button" type="button" title="세션 ID 복사">ID 복사</button>
+          </div>
+        </header>
+        <section class="overview" aria-label="세션 정보">
+          <div class="overview-item"><span>프로젝트</span><strong id="detail-project"></strong><small id="detail-cwd"></small></div>
+          <div class="overview-item"><span>메시지</span><strong id="detail-message-count"></strong><small>사용자와 Codex의 대화</small></div>
+          <div class="overview-item"><span>세션 ID</span><strong id="detail-id" class="mono"></strong><small id="detail-source"></small></div>
+        </section>
+        <section class="transcript-section" aria-label="대화 미리보기">
+          <div class="transcript-heading"><div><span class="eyebrow">CONVERSATION</span><h3>대화 미리보기</h3></div><div class="segmented" role="group" aria-label="메시지 필터"><button type="button" data-filter="all" class="active">전체</button><button type="button" data-filter="user">내 질문</button><button type="button" data-filter="assistant">Codex 답변</button></div></div>
+          <div id="transcript" class="transcript"></div>
+        </section>
+      </div>
+    </main>
+  </div>
+  <div id="toast" class="toast" role="status" aria-live="polite"></div>
+  <script src="renderer.js"></script>
+</body>
+</html>
