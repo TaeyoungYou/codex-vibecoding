@@ -1,0 +1,335 @@
+:root {
+  color-scheme: dark;
+  font-family: Inter, "Noto Sans KR", Arial, sans-serif;
+  background: #0d1117;
+  color: #f4f8fb;
+  scroll-behavior: smooth;
+
+  --color-accent: #00d4ff;
+  --color-surface: #0a0a0a;
+  --color-card: #121c25;
+  --color-border: #263641;
+  --color-muted: #aebdc7;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  line-height: 1.6;
+}
+
+a {
+  color: inherit;
+}
+
+button,
+input {
+  font: inherit;
+}
+
+:focus-visible {
+  outline: 2px solid var(--color-accent);
+  outline-offset: 4px;
+}
+
+:where(h1, h2, h3, p) {
+  margin-top: 0;
+}
+
+.container {
+  width: min(100% - 2.5rem, 1120px);
+  margin-inline: auto;
+}
+
+.skip-link {
+  position: absolute;
+  z-index: 10;
+  top: -5rem;
+  left: 1rem;
+  padding: .7rem 1rem;
+  background: var(--color-accent);
+  color: var(--color-surface);
+}
+
+.skip-link:focus {
+  top: 1rem;
+}
+
+.button {
+  display: inline-block;
+  border: 1px solid var(--color-accent);
+  border-radius: .35rem;
+  padding: .85rem 1.35rem;
+  background: var(--color-accent);
+  color: #061015;
+  font-weight: 800;
+  text-align: center;
+  text-decoration: none;
+  cursor: pointer;
+  transition: box-shadow .2s ease, transform .2s ease;
+}
+
+.button:hover {
+  box-shadow: 0 0 22px #00d4ff80;
+  transform: translateY(-2px);
+}
+
+.eyebrow {
+  color: var(--color-accent);
+  font-weight: 700;
+  letter-spacing: .16em;
+  text-transform: uppercase;
+}
+
+.site-header {
+  border-bottom: 1px solid var(--color-border);
+  background: var(--color-surface);
+}
+
+.site-header__inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  min-height: 4.5rem;
+}
+
+.site-header__brand {
+  color: var(--color-accent);
+  font-weight: 800;
+  text-decoration: none;
+  letter-spacing: .08em;
+}
+
+.site-header__nav {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1.25rem;
+}
+
+.site-header__nav-link {
+  color: #d1dce3;
+  text-decoration: none;
+}
+
+.site-header__nav-link:hover,
+.site-header__nav-link:focus-visible {
+  color: var(--color-accent);
+}
+
+.hero {
+  display: grid;
+  align-items: center;
+  min-height: min(790px, calc(100svh - 4.5rem));
+  padding-block: 6rem;
+  background:
+    linear-gradient(90deg, #0a0a0ab8 0%, #0a0a0a33 55%, #0a0a0a29 100%),
+    url("assets/hero-cyberpunk-ai.png") center / cover no-repeat;
+}
+
+.hero__title {
+  max-width: 900px;
+  margin-bottom: 1rem;
+  font-size: clamp(2.7rem, 7vw, 6rem);
+  line-height: 1.08;
+  letter-spacing: -.05em;
+}
+
+.hero__theme {
+  max-width: 720px;
+  color: #a8eefe;
+  font-size: clamp(1.25rem, 2.7vw, 1.8rem);
+  font-weight: 600;
+}
+
+.hero__summary {
+  max-width: 670px;
+  color: #c3ced6;
+}
+
+.hero__meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: .5rem 2rem;
+  margin: 2rem 0;
+  padding: 0;
+  list-style: none;
+  font-weight: 600;
+}
+
+.hero__meta-label {
+  color: var(--color-accent);
+}
+
+.section {
+  padding-block: 5.5rem;
+}
+
+.section__title {
+  margin-bottom: 2rem;
+  font-size: clamp(2rem, 4vw, 3rem);
+  line-height: 1.2;
+}
+
+.section__intro {
+  max-width: 680px;
+  margin-bottom: 2rem;
+  color: var(--color-muted);
+}
+
+.speakers__grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 1.25rem;
+}
+
+.speaker-card {
+  min-height: 290px;
+  border: 1px solid #29404e;
+  border-radius: .7rem;
+  padding: 2rem;
+  background: var(--color-card);
+}
+
+.speaker-card__avatar {
+  display: grid;
+  place-items: center;
+  width: 5.5rem;
+  height: 5.5rem;
+  margin-bottom: 1.5rem;
+  border: 1px solid #00d4ff55;
+  border-radius: 50%;
+  background: #123544;
+  color: #9beeff;
+  font-size: .75rem;
+  text-align: center;
+}
+
+.speaker-card__title {
+  margin-bottom: .35rem;
+}
+
+.speaker-card__description {
+  margin-bottom: 0;
+  color: var(--color-muted);
+}
+
+.registration {
+  border-block: 1px solid var(--color-border);
+  background: var(--color-surface);
+}
+
+.registration__inner {
+  max-width: 760px;
+}
+
+.registration__form {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1.25rem;
+}
+
+.form-field {
+  display: grid;
+  gap: .45rem;
+}
+
+.form-field__label {
+  font-weight: 700;
+}
+
+.form-field__input {
+  width: 100%;
+  border: 1px solid #4b6676;
+  border-radius: .35rem;
+  padding: .8rem .9rem;
+  background: var(--color-card);
+  color: #fff;
+}
+
+.form-field__input:focus {
+  border-color: var(--color-accent);
+}
+
+.registration__actions {
+  grid-column: 1 / -1;
+}
+
+.registration__note {
+  margin: .7rem 0 0;
+  color: var(--color-muted);
+  font-size: .9rem;
+}
+
+.registration__status {
+  min-height: 1.6rem;
+  margin: .75rem 0 0;
+  color: #a8eefe;
+}
+
+.site-footer {
+  padding-block: 2.5rem;
+}
+
+.site-footer__inner {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 1.5rem;
+  color: var(--color-muted);
+  font-size: .9rem;
+}
+
+.site-footer__copyright {
+  margin-bottom: 0;
+}
+
+.site-footer__links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: .6rem 1.25rem;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.site-footer__pending-link {
+  color: #81919b;
+}
+
+@media (max-width: 760px) {
+  .site-header__inner {
+    align-items: flex-start;
+    flex-direction: column;
+    padding-block: 1rem;
+  }
+
+  .hero {
+    min-height: 620px;
+    padding-block: 5rem;
+    background-image:
+      linear-gradient(90deg, #0a0a0ae8, #0a0a0a99),
+      url("assets/hero-cyberpunk-ai.png");
+    background-position: center, 42% center;
+  }
+
+  .speakers__grid,
+  .registration__form {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  :root {
+    scroll-behavior: auto;
+  }
+
+  .button {
+    transition: none;
+  }
+}
