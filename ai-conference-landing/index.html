@@ -1,0 +1,230 @@
+<!doctype html>
+<html lang="ko">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta
+      name="description"
+      content="2026 AI Innovators Conference. 11월 12일부터 14일까지 서울 코엑스와 온라인에서 만나는 자율 에이전트의 미래."
+    />
+    <title>AIIC 2026 | 2026 AI Innovators Conference</title>
+    <style>
+      :root {
+        color-scheme: dark;
+        font-family: Inter, "Noto Sans KR", Arial, sans-serif;
+        background: #0d1117;
+        color: #f4f8fb;
+        scroll-behavior: smooth;
+      }
+
+      * { box-sizing: border-box; }
+      body { margin: 0; line-height: 1.6; }
+      a { color: inherit; }
+      button, input { font: inherit; }
+      :focus-visible { outline: 2px solid #00d4ff; outline-offset: 4px; }
+
+      .skip-link {
+        position: absolute;
+        left: 1rem;
+        top: -5rem;
+        z-index: 10;
+        padding: .7rem 1rem;
+        background: #00d4ff;
+        color: #0a0a0a;
+      }
+      .skip-link:focus { top: 1rem; }
+      .container { width: min(100% - 2.5rem, 1120px); margin-inline: auto; }
+
+      .site-header { border-bottom: 1px solid #263641; background: #0a0a0a; }
+      .header-inner { display: flex; align-items: center; justify-content: space-between; gap: 1rem; min-height: 4.5rem; }
+      .brand { color: #00d4ff; font-weight: 800; text-decoration: none; letter-spacing: .08em; }
+      .site-nav { display: flex; flex-wrap: wrap; gap: 1.25rem; }
+      .site-nav a { color: #d1dce3; text-decoration: none; }
+      .site-nav a:hover, .site-nav a:focus-visible { color: #00d4ff; }
+
+      .hero {
+        display: grid;
+        align-items: center;
+        min-height: min(790px, calc(100svh - 4.5rem));
+        padding-block: 6rem;
+        background:
+          linear-gradient(90deg, #0a0a0ab8 0%, #0a0a0a33 55%, #0a0a0a29 100%),
+          url("assets/hero-cyberpunk-ai.png") center / cover no-repeat;
+      }
+      .eyebrow { color: #00d4ff; font-weight: 700; letter-spacing: .16em; text-transform: uppercase; }
+      h1, h2, h3, p { margin-top: 0; }
+      h1 { max-width: 900px; margin-bottom: 1rem; font-size: clamp(2.7rem, 7vw, 6rem); line-height: 1.08; letter-spacing: -.05em; }
+      h2 { margin-bottom: 2rem; font-size: clamp(2rem, 4vw, 3rem); line-height: 1.2; }
+      h3 { margin-bottom: .35rem; }
+      .hero-theme { max-width: 720px; color: #a8eefe; font-size: clamp(1.25rem, 2.7vw, 1.8rem); font-weight: 600; }
+      .hero-summary { max-width: 670px; color: #c3ced6; }
+      .event-meta { display: flex; flex-wrap: wrap; gap: .5rem 2rem; margin: 2rem 0; padding: 0; list-style: none; font-weight: 600; }
+      .event-meta strong { color: #00d4ff; }
+      .button {
+        display: inline-block;
+        border: 1px solid #00d4ff;
+        border-radius: .35rem;
+        padding: .85rem 1.35rem;
+        background: #00d4ff;
+        color: #061015;
+        font-weight: 800;
+        text-align: center;
+        text-decoration: none;
+        cursor: pointer;
+        transition: box-shadow .2s ease, transform .2s ease;
+      }
+      .button:hover { box-shadow: 0 0 22px #00d4ff80; transform: translateY(-2px); }
+
+      .section { padding-block: 5.5rem; }
+      .section-intro { max-width: 680px; margin-bottom: 2rem; color: #aebdc7; }
+      .speaker-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 1.25rem; }
+      .speaker-card { min-height: 290px; border: 1px solid #29404e; border-radius: .7rem; padding: 2rem; background: #121c25; }
+      .speaker-avatar { display: grid; place-items: center; width: 5.5rem; height: 5.5rem; margin-bottom: 1.5rem; border: 1px solid #00d4ff55; border-radius: 50%; background: #123544; color: #9beeff; font-size: .75rem; text-align: center; }
+      .speaker-card p { margin-bottom: 0; color: #aebdc7; }
+
+      .registration { border-block: 1px solid #263641; background: #0a0a0a; }
+      .registration-inner { max-width: 760px; }
+      .registration-form { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 1.25rem; }
+      .field { display: grid; gap: .45rem; }
+      .field label { font-weight: 700; }
+      .field input { width: 100%; border: 1px solid #4b6676; border-radius: .35rem; padding: .8rem .9rem; background: #121c25; color: #fff; }
+      .field input:focus { border-color: #00d4ff; }
+      .form-actions { grid-column: 1 / -1; }
+      .form-note { margin: .7rem 0 0; color: #aebdc7; font-size: .9rem; }
+      .form-status { min-height: 1.6rem; margin: .75rem 0 0; color: #a8eefe; }
+
+      .site-footer { padding-block: 2.5rem; }
+      .footer-inner { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 1.5rem; color: #aebdc7; font-size: .9rem; }
+      .site-footer p { margin-bottom: 0; }
+      .footer-links { display: flex; flex-wrap: wrap; gap: .6rem 1.25rem; padding: 0; margin: 0; list-style: none; }
+      .pending-link { color: #81919b; }
+
+      @media (max-width: 760px) {
+        .header-inner { align-items: flex-start; flex-direction: column; padding-block: 1rem; }
+        .hero {
+          min-height: 620px;
+          padding-block: 5rem;
+          background-image:
+            linear-gradient(90deg, #0a0a0ae8, #0a0a0a99),
+            url("assets/hero-cyberpunk-ai.png");
+          background-position: center, 42% center;
+        }
+        .speaker-grid, .registration-form { grid-template-columns: 1fr; }
+      }
+      @media (prefers-reduced-motion: reduce) {
+        :root { scroll-behavior: auto; }
+        .button { transition: none; }
+      }
+    </style>
+  </head>
+  <body>
+    <a class="skip-link" href="#main">본문으로 바로가기</a>
+
+    <header class="site-header">
+      <div class="container header-inner">
+        <a class="brand" href="#top" aria-label="AIIC 2026 홈">AIIC 2026</a>
+        <nav class="site-nav" aria-label="주요 메뉴">
+          <a href="#speakers">연사 소개</a>
+          <a href="#registration">사전 등록</a>
+        </nav>
+      </div>
+    </header>
+
+    <main id="main">
+      <section class="hero" id="top" aria-labelledby="hero-title">
+        <div class="container">
+          <p class="eyebrow">AIIC 2026 · Seoul + Online</p>
+          <h1 id="hero-title">2026 AI Innovators Conference</h1>
+          <p class="hero-theme">Beyond Human: The Next Era of Autonomous Agents</p>
+          <p class="hero-summary">전 세계 AI 연구자, 개발자, 기업가와 함께 최신 인공지능 기술과 미래의 비전을 나눕니다.</p>
+          <ul class="event-meta" aria-label="행사 정보">
+            <li><strong>일시</strong> <time datetime="2026-11-12">2026.11.12</time> - <time datetime="2026-11-14">11.14</time></li>
+            <li><strong>장소</strong> 서울 코엑스 그랜드 볼룸 · 온라인 생중계</li>
+          </ul>
+          <a class="button" href="#registration">사전 등록하기</a>
+        </div>
+      </section>
+
+      <section class="section" id="speakers" aria-labelledby="speakers-title">
+        <div class="container">
+          <p class="eyebrow">Speakers</p>
+          <h2 id="speakers-title">Keynote Speakers</h2>
+          <p class="section-intro">컨퍼런스의 기조연설자를 소개합니다. 연사와 발표 주제는 확정되는 대로 공개됩니다.</p>
+          <div class="speaker-grid">
+            <!-- 확정된 연사 사진, 이름, 소속, 발표 주제로 각 카드를 교체하세요. -->
+            <article class="speaker-card">
+              <div class="speaker-avatar" aria-hidden="true">PHOTO</div>
+              <h3>연사 공개 예정</h3>
+              <p>소속 · 발표 주제 추후 안내</p>
+            </article>
+            <article class="speaker-card">
+              <div class="speaker-avatar" aria-hidden="true">PHOTO</div>
+              <h3>연사 공개 예정</h3>
+              <p>소속 · 발표 주제 추후 안내</p>
+            </article>
+            <article class="speaker-card">
+              <div class="speaker-avatar" aria-hidden="true">PHOTO</div>
+              <h3>연사 공개 예정</h3>
+              <p>소속 · 발표 주제 추후 안내</p>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <section class="section registration" id="registration" aria-labelledby="registration-title">
+        <div class="container registration-inner">
+          <p class="eyebrow">Registration</p>
+          <h2 id="registration-title">Reserve Your Seat</h2>
+          <p class="section-intro">AIIC 2026 참가에 관심이 있으신가요? 아래 정보를 입력해 주세요.</p>
+          <!-- 실제 접수 전에는 제출 API, 개인정보 안내, 동의 절차를 연결해야 합니다. -->
+          <form class="registration-form" id="registration-form">
+            <div class="field">
+              <label for="full-name">이름 <span aria-hidden="true">*</span></label>
+              <input id="full-name" name="fullName" type="text" autocomplete="name" required />
+            </div>
+            <div class="field">
+              <label for="email">이메일 주소 <span aria-hidden="true">*</span></label>
+              <input id="email" name="email" type="email" autocomplete="email" required />
+            </div>
+            <div class="field">
+              <label for="company">소속 회사명 <span aria-hidden="true">*</span></label>
+              <input id="company" name="company" type="text" autocomplete="organization" required />
+            </div>
+            <div class="field">
+              <label for="job-title">직급 <span aria-hidden="true">*</span></label>
+              <input id="job-title" name="jobTitle" type="text" autocomplete="organization-title" required />
+            </div>
+            <div class="form-actions">
+              <button class="button" type="submit">등록하기</button>
+              <p class="form-note">* 필수 입력 항목 · 현재 페이지는 기본 시안이며 등록 접수는 아직 연결되지 않았습니다.</p>
+              <p class="form-status" id="form-status" role="status" aria-live="polite"></p>
+            </div>
+          </form>
+        </div>
+      </section>
+    </main>
+
+    <footer class="site-footer">
+      <div class="container footer-inner">
+        <p>© 2026 AI Innovators Conference. All rights reserved.</p>
+        <!-- 공식 계정 및 법적 문서 URL이 확정되면 링크로 교체하세요. -->
+        <ul class="footer-links" aria-label="추가 정보">
+          <li><span class="pending-link">Twitter</span></li>
+          <li><span class="pending-link">LinkedIn</span></li>
+          <li><span class="pending-link">GitHub</span></li>
+          <li><span class="pending-link">개인정보처리방침</span></li>
+          <li><span class="pending-link">이용약관</span></li>
+        </ul>
+      </div>
+    </footer>
+
+    <script>
+      const registrationForm = document.querySelector("#registration-form");
+      registrationForm.addEventListener("submit", (event) => {
+        event.preventDefault();
+        document.querySelector("#form-status").textContent =
+          "등록 접수 기능은 준비 중입니다. 아직 정보가 전송되지 않았습니다.";
+      });
+    </script>
+  </body>
+</html>
