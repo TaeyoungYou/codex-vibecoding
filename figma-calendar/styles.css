@@ -1,0 +1,382 @@
+@font-face {
+  font-family: Inter;
+  font-style: normal;
+  font-weight: 100 900;
+  font-display: swap;
+  src: url("./assets/fonts/InterVariable.woff2") format("woff2");
+}
+
+:root {
+  color-scheme: light;
+  --color-page: #e8e8e8;
+  --color-surface: #fff;
+  --color-text: #000;
+  --color-active: #45539d;
+  --color-stroke: #d5d4df;
+  --color-inactive: #f2f3f7;
+  --color-inactive-text: #a8a8a8;
+  --color-muted: #626477;
+  --color-error: #a3293c;
+  --card-radius: 16px;
+  --card-padding: 30px;
+  font-family: Inter, "Apple SD Gothic Neo", "Malgun Gothic", sans-serif;
+  color: var(--color-text);
+  background: var(--color-page);
+  font-synthesis: none;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  min-width: 280px;
+  min-height: 100svh;
+  margin: 0;
+  padding: 48px 16px;
+}
+
+button,
+input {
+  font: inherit;
+}
+
+button {
+  cursor: pointer;
+}
+
+button:disabled,
+input:disabled {
+  cursor: not-allowed;
+}
+
+button:focus-visible,
+input:focus-visible {
+  outline: 3px solid var(--color-active);
+  outline-offset: 3px;
+}
+
+.CalendarApp {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  width: min(502px, 100%);
+  margin-inline: auto;
+}
+
+.CalendarApp__ScreenReaderOnly {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+}
+
+.CalendarApp__StorageError {
+  margin: 0;
+  padding: 16px;
+  border: 1px solid var(--color-stroke);
+  border-radius: var(--card-radius);
+  color: var(--color-error);
+  background: var(--color-surface);
+  font-size: 14px;
+  line-height: 1.6;
+  overflow-wrap: anywhere;
+}
+
+.Calendar,
+.Schedule {
+  width: 100%;
+  padding: var(--card-padding);
+  border-radius: var(--card-radius);
+  background: var(--color-surface);
+}
+
+.Calendar__Header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  min-height: 46px;
+  margin-bottom: 12px;
+}
+
+.Calendar__Month {
+  margin: 0;
+  font-size: 24px;
+  font-weight: 900;
+  line-height: normal;
+  white-space: nowrap;
+}
+
+.Calendar__Navigation {
+  display: flex;
+  flex-shrink: 0;
+  gap: 8px;
+}
+
+.Calendar__NavButton {
+  display: grid;
+  place-items: center;
+  width: 46px;
+  height: 46px;
+  padding: 16px;
+  border: 0;
+  border-radius: 8px;
+  background: transparent;
+}
+
+.Calendar__NavButton:hover:not(:disabled) {
+  background: var(--color-inactive);
+}
+
+.Calendar__NavIcon {
+  display: block;
+  max-width: none;
+}
+
+.Calendar__NavIcon--Next {
+  transform: scaleX(-1);
+}
+
+.Calendar__NavIcon--Disabled,
+.Calendar__NavButton:disabled .Calendar__NavIcon:not(.Calendar__NavIcon--Disabled) {
+  display: none;
+}
+
+.Calendar__NavButton:disabled .Calendar__NavIcon--Disabled {
+  display: block;
+}
+
+.Calendar__Weekdays,
+.Calendar__Dates {
+  display: grid;
+  grid-template-columns: repeat(7, minmax(0, 1fr));
+}
+
+.Calendar__Weekday {
+  display: grid;
+  place-items: center;
+  aspect-ratio: 1;
+  font-size: 14px;
+  font-weight: 600;
+  font-variant-numeric: lining-nums tabular-nums;
+}
+
+.Calendar__Dates {
+  gap: 1px;
+  padding: 1px;
+  background: var(--color-stroke);
+}
+
+.Calendar__Day {
+  display: grid;
+  place-items: center;
+  min-width: 0;
+  aspect-ratio: 1;
+  padding: 0;
+  border: 0;
+  border-radius: 0;
+  background: var(--color-surface);
+  color: var(--color-text);
+  font-size: 14px;
+  font-weight: 400;
+  line-height: normal;
+  font-variant-numeric: lining-nums tabular-nums;
+}
+
+.Calendar__Day:hover:not(.Calendar__Day--Outside):not(.Calendar__Day--Selected) {
+  background: var(--color-inactive);
+}
+
+.Calendar__Day:focus-visible {
+  position: relative;
+  z-index: 1;
+  outline-offset: -3px;
+}
+
+.Calendar__Day--Selected {
+  background: var(--color-active);
+  color: var(--color-surface);
+  font-weight: 600;
+}
+
+.Calendar__Day--Outside {
+  background: var(--color-inactive);
+  color: var(--color-inactive-text);
+}
+
+.Schedule__Date {
+  margin: 0 0 24px;
+  font-size: 20px;
+  font-weight: 900;
+  line-height: 1.4;
+  overflow-wrap: anywhere;
+}
+
+.Schedule__Form {
+  margin-bottom: 20px;
+}
+
+.Schedule__Label {
+  display: block;
+  margin-bottom: 8px;
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.Schedule__InputRow {
+  display: flex;
+  gap: 8px;
+}
+
+.Schedule__Input {
+  flex: 1;
+  min-width: 0;
+  min-height: 46px;
+  padding: 12px;
+  border: 1px solid var(--color-stroke);
+  border-radius: 8px;
+  background: var(--color-surface);
+  color: var(--color-text);
+  font-size: 14px;
+}
+
+.Schedule__Input::placeholder {
+  color: var(--color-muted);
+}
+
+.Schedule__Input[aria-invalid="true"] {
+  border-color: var(--color-error);
+}
+
+.Schedule__AddButton {
+  flex-shrink: 0;
+  min-height: 46px;
+  padding: 12px 18px;
+  border: 1px solid var(--color-active);
+  border-radius: 8px;
+  background: var(--color-active);
+  color: var(--color-surface);
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.Schedule__AddButton:hover:not(:disabled) {
+  filter: brightness(0.92);
+}
+
+.Schedule__Input:disabled,
+.Schedule__AddButton:disabled {
+  opacity: 0.55;
+}
+
+.Schedule__Error {
+  margin: 8px 0 0;
+  color: var(--color-error);
+  font-size: 14px;
+  line-height: 1.5;
+}
+
+.Schedule__List {
+  display: grid;
+  gap: 8px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.Schedule__Item {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  padding: 12px;
+  border: 1px solid var(--color-stroke);
+  border-radius: 8px;
+}
+
+.Schedule__Title {
+  flex: 1;
+  min-width: 0;
+  padding-block: 9px;
+  font-size: 14px;
+  line-height: 1.6;
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
+}
+
+.Schedule__DeleteButton {
+  flex-shrink: 0;
+  min-height: 40px;
+  padding: 9px 12px;
+  border: 1px solid var(--color-stroke);
+  border-radius: 6px;
+  background: var(--color-surface);
+  color: var(--color-active);
+  font-size: 13px;
+  font-weight: 600;
+}
+
+.Schedule__DeleteButton:hover {
+  background: var(--color-inactive);
+}
+
+.Schedule__Empty {
+  margin: 0;
+  padding: 24px 12px;
+  border-radius: 8px;
+  background: var(--color-inactive);
+  color: var(--color-muted);
+  text-align: center;
+  font-size: 14px;
+  line-height: 1.6;
+}
+
+@media (max-width: 520px) {
+  :root {
+    --card-padding: 20px;
+  }
+
+  body {
+    padding-block: 24px;
+  }
+
+  .Calendar__Month {
+    font-size: clamp(18px, 4.8vw, 24px);
+  }
+
+  .Calendar__Navigation {
+    gap: 4px;
+  }
+
+  .Calendar__NavButton {
+    width: 40px;
+    height: 40px;
+    padding: 13px;
+  }
+}
+
+@media (max-width: 360px) {
+  :root {
+    --card-padding: 16px;
+  }
+
+  .Calendar__NavButton {
+    width: 36px;
+    height: 40px;
+    padding: 11px;
+  }
+
+  .Schedule__Date {
+    font-size: 18px;
+  }
+
+  .Schedule__InputRow {
+    flex-direction: column;
+  }
+}
+
+[hidden] {
+  display: none !important;
+}
