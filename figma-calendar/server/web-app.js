@@ -63,7 +63,13 @@ export function createWebApplication({ origin, siteKey, auth, cipher, connect, n
   function dateQuery(req) {
     // Node function helpers may add dynamic route parameters to req.query.
     // Validate the original query string, including duplicate date keys.
-    const entries = [...new URL(req.originalUrl, origin).searchParams];
+    let entries = [...new URL(req.originalUrl, origin).searchParams];
+    if (req.method === 'DELETE') {
+      const id = validateId(req.path.slice('/events/'.length));
+      const injected = entries.filter(([key]) => key === 'id');
+      if (injected.length > 1 || (injected.length === 1 && injected[0][1] !== id)) throw new ApiError(400, 'INVALID_QUERY', '날짜를 확인해 주세요.');
+      entries = entries.filter(([key]) => key !== 'id');
+    }
     if (entries.length !== 1 || entries[0][0] !== 'date') throw new ApiError(400, 'INVALID_QUERY', '날짜를 확인해 주세요.');
     return validateDate(entries[0][1]);
   }
@@ -139,7 +145,13 @@ export function createWebApplication({ origin, siteKey, auth, cipher, connect, n
         await client.query(error instanceof ApiError ? 'COMMIT' : 'ROLLBACK').catch(() => {});
       }
     } finally { await client?.end().catch(() => {}); }
-    if (failure) return next(failure);
+    if (failure) {
+      if (req.method === 'DELETE' && failure.status === 400) {
+        // Names and error codes only: never log cookies, tokens or event data.
+        console.info(JSON.stringify({ type: 'calendar-delete-validation', code: failure.code, queryKeys: [...new URL(req.originalUrl, origin).searchParams.keys()] }));
+      }
+      return next(failure);
+    }
     if (setCookie) cookie(res, session);
     res.status(response.status ?? 200).json(response.body);
   });

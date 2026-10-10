@@ -95,6 +95,10 @@ test('삭제는 플랫폼의 route query 대신 원래 날짜를 검증하고 �
   try {
     expect(await request('?date=2099-10-09')).toBe(200);
     expect(query).toHaveBeenCalledWith(expect.stringContaining('DELETE FROM calendar_private.events'), [id, '2099-10-09']);
+    expect(await request(`?date=2099-10-09&id=${id}`)).toBe(200);
+    expect(await request(`?id=${id}&date=2099-10-09`)).toBe(200);
+    expect(await request('?date=2099-10-09&id=7bc150cd-b8f1-4a6d-9053-b5caf1f40259')).toBe(400);
+    expect(await request(`?date=2099-10-09&id=${id}&id=${id}`)).toBe(400);
     expect(await request('?date=2099-10-09&date=2099-10-10')).toBe(400);
     expect(await request('?date=2099-10-09&extra=1')).toBe(400);
   } finally { await new Promise((resolve) => server.close(resolve)); }
