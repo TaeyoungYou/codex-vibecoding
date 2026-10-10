@@ -12,6 +12,7 @@ if (fs.existsSync(envPath)) {
   const env = parseEnv(fs.readFileSync(envPath, 'utf8'));
   if (env.CALENDAR_DB_PASSWORD) secrets.push(env.CALENDAR_DB_PASSWORD);
   if (env.CALENDAR_SUPABASE_PUBLISHABLE_KEY) secrets.push(env.CALENDAR_SUPABASE_PUBLISHABLE_KEY);
+  if (env.CALENDAR_SESSION_SECRET) secrets.push(env.CALENDAR_SESSION_SECRET);
   try { execFileSync('git', ['check-ignore', '--quiet', '--', envPath], { cwd: ROOT, stdio: 'pipe' }); }
   catch { console.error('FAIL: 서버 설정 파일의 Git 제외를 확인하세요.'); failures++; }
   try { verifySecretFile(envPath); }
@@ -23,8 +24,8 @@ function files(dir) {
   return fs.readdirSync(dir, { withFileTypes: true }).flatMap((entry) => entry.isDirectory() ? files(path.join(dir, entry.name)) : [path.join(dir, entry.name)]);
 }
 
-const roots = ['client', 'dist', 'server', 'scripts', 'tests', 'supabase', 'docs', 'memory-bank', 'artifacts'];
-const targets = [...roots.flatMap((dir) => files(path.join(ROOT, dir))), ...['README.md', 'AGENTS.md', 'package.json', 'package-lock.json'].map((name) => path.join(ROOT, name))];
+const roots = ['api', 'client', 'dist', 'server', 'scripts', 'tests', 'supabase', 'docs', 'memory-bank', 'artifacts'];
+const targets = [...roots.flatMap((dir) => files(path.join(ROOT, dir))), ...['README.md', 'AGENTS.md', 'package.json', 'package-lock.json', 'vercel.json', '.vercelignore'].map((name) => path.join(ROOT, name))];
 function credentialPattern(content) {
   if (/sb_(?:secret|publishable)_[A-Za-z0-9_-]{15,}/.test(content) || /postgres(?:ql)?:\/\/[^\s:@]+:[^\s@]{8,}@/.test(content)) return true;
   return [...content.matchAll(/\beyJ[A-Za-z0-9_-]+\.([A-Za-z0-9_-]+)\.[A-Za-z0-9_-]+/g)].some((match) => {

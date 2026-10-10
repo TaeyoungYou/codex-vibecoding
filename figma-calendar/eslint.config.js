@@ -9,7 +9,7 @@ const globals = Object.fromEntries([
 ].map((name) => [name, 'readonly']));
 
 export default [
-  { ignores: ['node_modules/**', 'dist/**', 'coverage/**', 'artifacts/**', 'supabase/**'] },
+  { ignores: ['node_modules/**', 'dist/**', 'coverage/**', 'artifacts/**', 'supabase/**', '.cache/**', '.vercel/**', '.tools/**'] },
   js.configs.recommended,
   {
     files: ['**/*.{js,jsx}'],

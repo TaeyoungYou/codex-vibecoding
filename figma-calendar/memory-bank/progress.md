@@ -1,5 +1,19 @@
 # 진행 — 2026-10-09
 
+## 현재: Vercel API 수정 배포 및 실제 로그인 확인
+
+사용자의 환경 변수·도메인 등록 이후 나머지 수정 승인을 받아 API Node 함수, HTTPS Origin/Host 검사, Secure 쿠키, DB 공유 세션/요청 한도, AES-256-GCM Auth 토큰 암호화, Vercel 5초 재조회, 공개 CSP를 구현해 Production에 배포했다. 기존 로컬 SSE와 events 권한·데이터는 유지한다. CALENDAR_ORIGIN과 무작위 CALENDAR_SESSION_SECRET만 Production에 추가하고 기존 7개 환경 값은 보존했다.
+
+새 migration 20261010013230_vercel_shared_sessions.sql을 적용하고 원격 버전·SQL을 대조했다. 자동 테스트 66개·린트·빌드·check:db·check:security·audit 0건 통과. 실제 runtime DB와 mock Auth의 두 서버 세션/동시 갱신/CRUD/만료/장애 복구 검사 통과. 기존 일정 4개와 fingerprint 동일, Performance Advisor 0건과 기존 비밀번호 보호 WARN 1건 확인.
+
+첫 수정 배포 dpl_6c3z7y6gSNmCGttsRcJE85aN9D8w READY, session 200·보호 API 401·잘못된 CAPTCHA 400·비밀 경로 404를 확인했다. 사용자가 일반 브라우저 CAPTCHA 후 캘린더 열림을 확인했고 CLI 로그에도 실제 events GET 200이다. 자동화 Chromium은 Cloudflare 600010으로 막혔다. 공개 실제 추가·삭제/독립 브라우저 동기화와 대규모 부하 검사는 미검증이다. [최신 검증](../docs/verification.md)을 참고한다.
+
+## 이전: Vercel 공개 배포 최초 점검
+
+추가 MCP 상세 조회는 팀 권한 403으로 거부됐으나 공식 CLI 대체로 빌드 로그·설정·환경 목록을 확인했다. Root Directory=figma-calendar와 Node=24.x는 올바르고, 환경 변수 목록은 비어 있다. 빌드는 Vite 클라이언트만 생성하며 공개 JS/CSS는 로컬 빌드와 동일하다. 앱 서버 배포와 서버 환경 변수 설정, 공개 환경에 맞는 인증/동기화 구조 변경이 필요하다.
+
+사용자가 제공한 https://codex-vibecoding-seven.vercel.app/ 를 실제 Chromium과 HTTP로 확인했다. 화면은 200이지만 session/events/changes API가 모두 404여서 인증 화면에서 진입하지 못한다. 배포는 vite/READY, 커밋은 현재 구현 d47e582다. 공개 Host 거부와 인스턴스별 메모리 세션 분리를 격리 재현했다. 로컬 61개 테스트·린트·빌드·보안 검사는 통과했다. 앱 소스·DB·배포 설정은 변경하지 않았으며 공개 배포 수정은 미완료다. [점검 상세](../docs/vercel-deployment-review.md)를 참고한다. 아래 완료 기록은 기존 로컬 앱 범위다.
+
 ## 현재: 익명 인증·Turnstile 구현 및 통합 검증 완료
 
 2026-10-07 인계에서 재개했다. 실제 Turnstile → Supabase 익명 인증, 두 독립 Chromium 브라우저의 CRUD/SSE·탭/새로고침 세션 공유, 직접 DB INSERT/UPDATE/DELETE, 실제 LISTEN 종료·복구, 서버 재시작 후 재인증·누락 변경 복구를 확인했다. 실제 Auth와 제어한 서버 시계로 refreshSession 성공과 1시간 상한 이후 차단도 확인했다. 실제 1시간 대기 검사는 아니다.

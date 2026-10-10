@@ -15,14 +15,21 @@ function failure(error, signingIn = false) {
 
 // Every local session owns a client: refresh coordination must never cross users.
 export function createAuthService({ url, key }, { now = Date.now, makeClient = createClient } = {}) {
+  function clientFor(state) {
+    state.client ??= makeClient(url, key, {
+      auth: { persistSession: false, autoRefreshToken: false, detectSessionInUrl: false, storageKey: `calendar-${randomBytes(16).toString('hex')}` },
+      global: { fetch: (input, options = {}) => fetch(input, { ...options, signal: AbortSignal.any([state.controller.signal, AbortSignal.timeout(10000), ...(options.signal ? [options.signal] : [])]) }) },
+    });
+    return state.client;
+  }
   return {
     createSession() { return { client: null, credentials: null, expires: 0, refreshing: null, closed: false, controller: new AbortController() }; },
+    restoreSession(credentials, expires) {
+      return { ...this.createSession(), credentials, expires };
+    },
     async signIn(state, captchaToken) {
       if (state.closed) throw required();
-      state.client ??= makeClient(url, key, {
-        auth: { persistSession: false, autoRefreshToken: false, detectSessionInUrl: false, storageKey: `calendar-${randomBytes(16).toString('hex')}` },
-        global: { fetch: (input, options = {}) => fetch(input, { ...options, signal: AbortSignal.any([state.controller.signal, AbortSignal.timeout(10000), ...(options.signal ? [options.signal] : [])]) }) },
-      });
+      clientFor(state);
       let result;
       try { result = await state.client.auth.signInAnonymously({ options: { captchaToken } }); }
       catch { throw unavailable(); }
@@ -33,6 +40,7 @@ export function createAuthService({ url, key }, { now = Date.now, makeClient = c
     },
     async authorize(state) {
       if (!state || state.closed || !state.credentials || state.expires <= now()) throw required();
+      clientFor(state);
       if (state.credentials.expires_at * 1000 <= now() + 60000) {
         if (!state.refreshing) state.refreshing = (async () => {
           let result;

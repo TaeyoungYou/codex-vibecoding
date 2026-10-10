@@ -1,6 +1,6 @@
 # 익명 인증 운영 안내
 
-이 앱은 CAPTCHA를 통과할 때 Supabase 익명 계정을 생성하고, 토큰은 로컬 서버 메모리에만 보관한다. 같은 브라우저의 유효 세션은 재사용한다. 서버 재시작·최대 1시간 만료 이후 새로 입장하면 새 계정이 생길 수 있다. 앱 종료와 로컬 만료는 Supabase 계정을 삭제하지 않는다.
+이 앱은 CAPTCHA를 통과할 때 Supabase 익명 계정을 생성한다. 토큰은 로컬 서버 메모리 또는 Vercel의 암호화된 private 세션 테이블에 보관한다. 같은 브라우저의 유효 세션은 재사용한다. 로컬 서버 재시작·최대 1시간 만료 이후 새로 입장하면 새 계정이 생길 수 있다. Vercel 인스턴스 교체는 세션을 유지한다. 앱 종료와 세션 만료는 Supabase 계정을 삭제하지 않는다.
 
 [Supabase 공식 안내](https://supabase.com/docs/guides/auth/auth-anonymous)에 따르면 익명 사용자 자동 정리는 제공되지 않는다. 이 프로젝트에도 자동 삭제·관리 API·관리 키를 추가하지 않았다.
 
@@ -24,7 +24,7 @@ where is_anonymous is true;
 
 ## 수동 정리
 
-1. 앱 서버를 종료해 메모리 토큰·로컬 인증 세션을 폐기한다. 필요한 다른 앱이 이 프로젝트의 Auth를 공유하는지 먼저 확인한다.
+1. 로컬은 앱 서버를 종료해 메모리 토큰·인증 세션을 폐기한다. Vercel 세션을 일괄 폐기하려면 Production의 CALENDAR_SESSION_SECRET을 새 무작위 키로 교체하고 재배포한다. 필요한 다른 앱이 이 프로젝트의 Auth를 공유하는지 먼저 확인한다.
 2. SQL Editor 또는 Users 화면에서 `is_anonymous=true`이고 생성·마지막 로그인 모두 30일보다 오래된 후보를 확인한다. 다른 사용자로 전환됐거나 사용 중인 계정은 제외한다. 필요한 백업과 사용자 참조 관계를 확인한다.
 3. 관리자 화면의 사용자 삭제 기능으로 검토한 계정만 삭제한다. SQL을 사용할 경우 아래처럼 **검토한 UUID를 직접 지정**하고 transaction에서 반환된 UUID를 확인한 뒤 COMMIT 또는 ROLLBACK한다. 아래 placeholder는 실제 UUID로 바꾸기 전에는 실행하지 않는다.
 
@@ -45,6 +45,6 @@ returning id;
 
 ## 검증과 설정 변경
 
-실제 CAPTCHA secret은 Supabase Dashboard에만 둔다. 앱의 setup:auth는 publishable key만 비표시로 받아 서버 설정에 기록한다. 설정 후 서버를 재시작한다. 관리자 키·secret·Auth 토큰을 채팅·명령 인자·로그·Git에 복사하지 않는다.
+실제 CAPTCHA secret은 Supabase Dashboard에만 둔다. 앱의 setup:auth는 publishable key만 비표시로 받아 서버 설정에 기록한다. 설정 후 로컬 서버를 재시작하거나 Vercel을 재배포한다. 관리자 키·secret·Auth 토큰을 채팅·명령 인자·로그·Git에 복사하지 않는다.
 
 자동 브라우저가 실제 Turnstile에 차단되면 사용자가 정상 브라우저에서 직접 완료한다. [Cloudflare 공식 테스트 안내](https://developers.cloudflare.com/turnstile/troubleshooting/testing/)의 dummy key는 격리 fixture에만 사용하며, 그 결과를 실제 Supabase 인증 성공으로 간주하지 않는다.

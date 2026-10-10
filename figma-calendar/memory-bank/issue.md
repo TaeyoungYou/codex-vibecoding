@@ -1,5 +1,15 @@
 # 이슈 — 2026-10-09
 
+## 해결: Vercel 공개 배포 API 404·세션 공유·공개 Host
+
+사용자 승인으로 Node API 함수·정확한 HTTPS Origin·Secure 쿠키·암호화된 DB 공유 세션·요청 한도·5초 재조회·정적 보안 헤더를 추가해 배포했다. session 200, 미인증 events 401, 잘못된 CAPTCHA 400을 확인했고 사용자 일반 브라우저에서 실제 CAPTCHA 후 캘린더가 열린다. 실제 인증된 events GET 200도 CLI 로그에서 확인했다. 기존 일정 4개와 내용 보존, 자동 테스트 66개 및 실제 runtime DB/mock Auth 교차 서버 검사 통과.
+
+남은 검증 제한: 자동화 브라우저 Turnstile 600010으로 공개 실제 추가·삭제/독립 브라우저 동기화를 직접 실행하지 못했다. 세션 128개·DB 연결 4개인 소규모 앱이며 대규모 부하 검사는 없다. 상세 MCP 로그 403은 동일 팀/프로젝트 공식 CLI로 대체했다. [수정 상세](../docs/vercel-deployment-review.md)를 참고한다.
+
+## 이전: Vercel API 404 최초 점검 기록
+
+https://codex-vibecoding-seven.vercel.app/ 는 화면만 열리고 /api/session, /api/events, /api/changes가 Vercel NOT_FOUND 404를 반환한다. 브라우저에서도 인증 연결 오류를 확인했다. 현재 로컬 전용 서버의 Host/Origin 고정, 메모리 세션, 상주 LISTEN/SSE와 DB 연결 한도도 공개 배포 전환 시 해결해야 한다. Vercel 상세 MCP는 팀 권한 403이었으나 공식 CLI로 Root Directory/Node 설정 정상, Vite 빌드와 환경 변수 목록 0개를 확인했다. Cloudflare 허용 도메인은 미확인이다. [점검 상세와 검증 범위](../docs/vercel-deployment-review.md)를 참고한다. 아래 해결 기록은 기존 로컬 앱 범위다.
+
 ## 해결: 익명 인증·Turnstile 실제 통합 검증
 
 실제 CAPTCHA·Supabase 익명 로그인, 두 브라우저 CRUD/SSE, 탭·새로고침, 직접 DB 변경, LISTEN 복구, 서버 재시작 재인증을 확인했다. 실제 Auth 토큰 갱신·1시간 상한은 제어한 시계로 확인했으며 실제 1시간 대기와 구별한다. 격리 fixture의 오류·만료·반응형·StrictMode 검사도 완료했다. 자동 테스트는 61개다. [상세 검증](../docs/verification.md)을 참고한다.

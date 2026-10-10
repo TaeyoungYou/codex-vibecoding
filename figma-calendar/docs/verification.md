@@ -1,5 +1,26 @@
 # 구현 및 검증 기록 — 2026-10-09
 
+## 최신: Vercel 수정 배포
+
+2026-10-09 사용자 승인으로 API 함수·공개 HTTPS 검사·암호화된 공유 세션·5초 재조회를 구현해 Production에 배포했다. 최초 수정 배포 dpl_6c3z7y6gSNmCGttsRcJE85aN9D8w는 MCP READY다. 사용자가 일반 브라우저에서 실제 CAPTCHA 이후 캘린더 열림을 확인했다. CLI 요청 로그에서 실제 인증된 events GET 200을 확인했다.
+
+| 검사 | 결과 |
+| --- | --- |
+| 자동 테스트·린트·빌드 | 8개 파일/66개 통과, lint/build 통과 |
+| 실제 runtime DB + mock Auth | 두 서버 세션 공유, 동시 갱신 1회, 토큰 암호화, CSRF, CRUD/멱등성, 날짜 충돌, Auth 장애 복구, 만료 차단 통과 |
+| check:db | 실제 runtime 권한·TLS·CRUD·UPDATE/DDL/auth.users 접근 거부, 테스트 데이터 rollback |
+| check:security·audit | 실제 비밀번호/publishable key/세션 키 유출 대조·파일 ACL·Git 제외 통과, 취약점 0건 |
+| 공개 HTTP | session 200, 미인증 events 401, 잘못된 CAPTCHA 400, env/server/Git 경로 404 |
+| 공개 헤더·쿠키 | 정적 CSP/nosniff, API no-store, Secure/HttpOnly/SameSite=Strict |
+| DB | 기존 일정 4개와 fingerprint 6af5130e07d8243566d0fff35289b96b 보존, 새 두 테이블 FORCE RLS·anon/authenticated 접근 거부 |
+| Advisor | Performance 0건, 기존 password protection WARN 1건 유지 |
+
+자동화 Chromium은 Turnstile 600010으로 실제 로그인 검증을 완료하지 못했다. 사용자가 일반 브라우저 로그인 성공을 확인했으며, 공개 배포 실제 일정 추가·삭제·독립 브라우저 동기화는 아직 미검증이다. 5초 재조회와 기존 연결 한도 4를 사용하며 대규모 부하 검사는 하지 않았다. [수정 상세와 최초 점검](vercel-deployment-review.md)을 참고한다.
+
+## 이전: 공개 Vercel 배포 최초 점검
+
+기존 로컬 통합 검증과 별도로 공개 배포를 검사했다. https://codex-vibecoding-seven.vercel.app/ 의 화면은 200이지만 session/events/changes API는 모두 404다. Chromium에서도 인증 연결 오류를 확인했다. 로컬 테스트 61개·린트·빌드·보안 검사는 다시 통과했다. 앱/DB/배포 설정을 변경하지 않았으며 공개 배포의 인증·CRUD·SSE는 통과하지 못했다. [발견 사항과 미검증 범위](vercel-deployment-review.md)를 참고한다. 아래 내용은 기존 로컬 앱 검증 기록이다.
+
 Turnstile와 Supabase 익명 인증의 실제 통합 검증을 완료했다. 아래 최신 결과는 2026-10-09 America/Toronto 기준이다. 뒤의 2026-10-07 결과는 인증 도입 이전 기록으로 유지한다.
 
 ## 2026-10-09 인증 구현과 수정

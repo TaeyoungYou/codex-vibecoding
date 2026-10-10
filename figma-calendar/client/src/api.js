@@ -106,6 +106,13 @@ export function createApi(fetcher = (...args) => fetch(...args), makeSource = (u
         const data = await session(true);
         if (data.authStatus !== 'authenticated') return;
         if (stopped) return;
+        if (data.syncMode === 'poll') {
+          attempt = 0;
+          status('connected');
+          changed();
+          retryTimer = setTimeout(() => { retryTimer = null; void connect(); }, 5000);
+          return;
+        }
         source = makeSource('/api/changes');
         source.addEventListener('ready', (event) => receiveStatus(event, true));
         source.addEventListener('change', changed);
