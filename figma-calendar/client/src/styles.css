@@ -3,7 +3,7 @@
   font-style: normal;
   font-weight: 100 900;
   font-display: swap;
-  src: url("./assets/fonts/InterVariable.woff2") format("woff2");
+  src: url("/assets/fonts/InterVariable.woff2") format("woff2");
 }
 
 :root {
@@ -379,4 +379,64 @@ input:focus-visible {
 
 [hidden] {
   display: none !important;
+}
+
+.CalendarApp__Connection {
+  margin: -4px 0 0;
+  color: var(--color-muted);
+  font-size: 12px;
+  line-height: 1.6;
+  text-align: center;
+}
+
+.CalendarApp__Content {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.AuthGate {
+  padding: var(--card-padding);
+  border-radius: var(--card-radius);
+  background: var(--color-surface);
+}
+
+.AuthGate__Eyebrow {
+  margin: 0 0 12px;
+  color: var(--color-active);
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+}
+
+.AuthGate__Heading { margin: 0 0 16px; font-size: 24px; }
+.AuthGate__Description { margin: 0 0 24px; color: var(--color-muted); font-size: 14px; line-height: 1.8; }
+.AuthGate__Widget { min-height: 65px; margin-bottom: 20px; }
+.AuthGate__Error { color: var(--color-error); font-size: 14px; line-height: 1.7; overflow-wrap: anywhere; }
+.AuthGate__StartButton, .AuthGate__RetryButton {
+  min-height: 46px;
+  padding: 12px 18px;
+  border: 1px solid var(--color-active);
+  border-radius: 8px;
+  font-size: 14px;
+  font-weight: 600;
+}
+.AuthGate__StartButton { width: 100%; color: var(--color-surface); background: var(--color-active); }
+.AuthGate__StartButton:disabled { opacity: 0.55; }
+.AuthGate__RetryButton { margin-top: 12px; color: var(--color-active); background: var(--color-surface); }
+
+.Schedule__ReadError {
+  color: var(--color-error);
+  font-size: 14px;
+  line-height: 1.6;
+  overflow-wrap: anywhere;
+}
+
+.Schedule__RetryButton {
+  min-height: 40px;
+  border: 1px solid var(--color-stroke);
+  border-radius: 8px;
+  padding: 8px 12px;
+  color: var(--color-active);
+  background: var(--color-surface);
 }

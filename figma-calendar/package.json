@@ -1,0 +1,41 @@
+{
+  "name": "figma-calendar",
+  "version": "2.0.0",
+  "private": true,
+  "type": "module",
+  "engines": {
+    "node": ">=24.0.0"
+  },
+  "scripts": {
+    "dev": "node server/index.js --dev",
+    "build": "vite build",
+    "start": "node server/index.js",
+    "test": "vitest run",
+    "lint": "eslint .",
+    "check:security": "node scripts/check-security.js",
+    "setup": "powershell.exe -NoProfile -ExecutionPolicy Bypass -File scripts/setup.ps1",
+    "setup:db": "powershell.exe -NoProfile -ExecutionPolicy Bypass -File scripts/provision.ps1",
+    "setup:auth": "powershell.exe -NoProfile -ExecutionPolicy Bypass -File scripts/setup-auth.ps1",
+    "setup:tools": "powershell.exe -NoProfile -ExecutionPolicy Bypass -File scripts/setup-tools.ps1",
+    "check:db": "node scripts/verify-db.js"
+  },
+  "dependencies": {
+    "@supabase/supabase-js": "2.117.3",
+    "express": "5.2.1",
+    "helmet": "8.3.0",
+    "pg": "8.23.1",
+    "react": "19.3.0",
+    "react-dom": "19.3.0"
+  },
+  "devDependencies": {
+    "@eslint/js": "10.0.1",
+    "@testing-library/react": "16.3.3",
+    "@testing-library/user-event": "14.6.7",
+    "@vitejs/plugin-react": "6.1.2",
+    "eslint": "10.12.0",
+    "eslint-plugin-react-hooks": "7.1.1",
+    "jsdom": "29.0.1",
+    "vite": "8.3.3",
+    "vitest": "5.0.3"
+  }
+}

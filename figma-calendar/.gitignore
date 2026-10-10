@@ -1,0 +1,13 @@
+node_modules/
+dist/
+.env*
+!.env.server.example
+.certs/
+coverage/
+.cache/
+.tools/
+supabase/.temp/
+artifacts/react-*.png
+artifacts/auth-*.png
+artifacts/auth-live-clock.mjs
+artifacts/test-*.log
