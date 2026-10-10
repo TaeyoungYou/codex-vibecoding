@@ -15,7 +15,7 @@
 | DB | 기존 일정 4개와 fingerprint 6af5130e07d8243566d0fff35289b96b 보존, 새 두 테이블 FORCE RLS·anon/authenticated 접근 거부 |
 | Advisor | Performance 0건, 기존 password protection WARN 1건 유지 |
 
-자동화 Chromium은 Turnstile 600010으로 실제 로그인 검증을 완료하지 못했다. 사용자가 일반 브라우저 로그인 성공을 확인했으며, 공개 배포 실제 일정 추가·삭제·독립 브라우저 동기화는 아직 미검증이다. 5초 재조회와 기존 연결 한도 4를 사용하며 대규모 부하 검사는 하지 않았다. [수정 상세와 최초 점검](vercel-deployment-review.md)을 참고한다.
+자동화 Chromium은 Turnstile 600010으로 실제 로그인 검증을 완료하지 못했다. 사용자가 일반 브라우저 로그인·추가 성공과 삭제 실패를 확인했다. 실제 CLI 로그 POST 201·DELETE 400을 확인하고, Vercel이 추가한 경로 id와 날짜 쿼리 검증 충돌을 재현·보정했다(c39bfac / dpl_C8TebDwjhzu6Ja3tqtq5kQ1mj1NM). 재배포 후 사용자가 정상 삭제를 확인했다. 테스트 66개와 실제 runtime DB/mock Auth 검사를 다시 통과했다. 기존 일정 4개와 내용 fingerprint는 그대로이며 사용자 점검 일정은 임의 삭제하지 않았다. 공개 독립 브라우저 동기화와 대규모 부하 검사는 별도 미검증이다. 5초 재조회와 기존 연결 한도 4를 사용한다. [수정 상세와 최초 점검](vercel-deployment-review.md)을 참고한다.
 
 ## 이전: 공개 Vercel 배포 최초 점검
 

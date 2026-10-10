@@ -6,7 +6,7 @@
 
 새 migration 20261010013230_vercel_shared_sessions.sql을 적용하고 원격 버전·SQL을 대조했다. 자동 테스트 66개·린트·빌드·check:db·check:security·audit 0건 통과. 실제 runtime DB와 mock Auth의 두 서버 세션/동시 갱신/CRUD/만료/장애 복구 검사 통과. 기존 일정 4개와 fingerprint 동일, Performance Advisor 0건과 기존 비밀번호 보호 WARN 1건 확인.
 
-첫 수정 배포 dpl_6c3z7y6gSNmCGttsRcJE85aN9D8w READY, session 200·보호 API 401·잘못된 CAPTCHA 400·비밀 경로 404를 확인했다. 사용자가 일반 브라우저 CAPTCHA 후 캘린더 열림을 확인했고 CLI 로그에도 실제 events GET 200이다. 자동화 Chromium은 Cloudflare 600010으로 막혔다. 공개 실제 추가·삭제/독립 브라우저 동기화와 대규모 부하 검사는 미검증이다. [최신 검증](../docs/verification.md)을 참고한다.
+첫 수정 배포 dpl_6c3z7y6gSNmCGttsRcJE85aN9D8w READY, session 200·보호 API 401·잘못된 CAPTCHA 400·비밀 경로 404를 확인했다. 사용자 일반 브라우저의 실제 로그인·추가와 CLI events GET 200/POST 201을 확인했다. 삭제 400을 발견해 Vercel 동적 경로의 같은 단일 id 쿼리만 허용하도록 보정했다. GitHub main c39bfac와 자동 배포 dpl_C8TebDwjhzu6Ja3tqtq5kQ1mj1NM READY를 확인했고 사용자가 정상 삭제를 확인했다. 실제 공개 JS/CSS와 보안 검사한 로컬 빌드의 SHA256도 동일하다. 자동화 Chromium은 Cloudflare 600010으로 막혔다. 공개 독립 브라우저 동기화와 대규모 부하 검사는 별도 미검증이다. [최신 검증](../docs/verification.md)을 참고한다.
 
 ## 이전: Vercel 공개 배포 최초 점검
 

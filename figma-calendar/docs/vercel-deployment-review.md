@@ -12,7 +12,9 @@
 - 요청마다 DB 연결을 닫고 기존 role 연결 한도 4를 유지한다. Vercel에서는 5초 주기 재조회하며 로컬 LISTEN/SSE는 유지한다.
 - 새 migration 20261010013230_vercel_shared_sessions.sql만 적용했다. 기존 events·데이터·최소 권한과 이전 migration을 보존했다.
 
-실제 공개 HTTP 검사에서 /api/session 200, 미인증 events 401, 잘못된 CAPTCHA 400/CAPTCHA_REJECTED, 서버/env/Git 파일 404를 확인했다. 사용자가 일반 브라우저에서 CAPTCHA 후 캘린더가 열림을 확인했고, Vercel 요청 로그에도 인증된 events GET 200이 반복된다. 자동화 Chromium은 Turnstile 600010에 막혔다. 공개 배포의 실제 일정 추가·삭제와 독립 브라우저 간 반영은 아직 별도 확인하지 못했다.
+실제 공개 HTTP 검사에서 /api/session 200, 미인증 events 401, 잘못된 CAPTCHA 400/CAPTCHA_REJECTED, 서버/env/Git 파일 404를 확인했다. 사용자가 일반 브라우저에서 CAPTCHA 후 캘린더가 열림을 확인했고, Vercel 요청 로그에도 인증된 events GET 200이 반복된다. 자동화 Chromium은 Turnstile 600010에 막혔다. 사용자는 실제 일정 추가 성공·삭제 실패를 확인했으며 CLI 로그에도 POST 201·DELETE 400이다. Vercel 동적 경로의 추가 id 쿼리가 날짜 검증에서 거부되는 경우를 재현해, 경로와 같은 단일 id만 허용하도록 수정했다. 중복 id·다른 id·중복 date·다른 쿼리는 계속 거부한다. 수정 후 사용자 일반 브라우저에서 정상 삭제를 확인했다. 공개 독립 브라우저 간 반영은 별도 미검증이다.
+
+GitHub main에 API 수정과 vercel.json을 반영하고 Git 자동 배포를 확인했다. 설정 파일 누락으로 한 차례 503이 발생했으나 4f2dea3 / dpl_9J1zH7CeW5NvsoJphyaKwRY6UEVc에서 API 200을 복구했다. 삭제 보정은 c39bfac / dpl_C8TebDwjhzu6Ja3tqtq5kQ1mj1NM에 반영했으며 MCP READY/production/alias와 실제 삭제 성공을 확인했다. 실제 배포 JS/CSS의 SHA256은 보안 검사한 로컬 빌드와 동일하다.
 
 자동 테스트 66개, lint/build/check:db/check:security, audit(취약점 0건)을 통과했다. 실제 runtime DB와 mock Auth를 연결한 두 서버 검사에서 세션 공유·동시 refresh 1회·암호화·CSRF·CRUD/멱등성·잘못된 날짜 삭제 거부·인증 장애 복구·만료 차단을 확인했다. 실제 CAPTCHA 통합 성공과 mock Auth 검사는 구별한다. 기존 일정은 4개이며 내용 fingerprint가 같다.
 
