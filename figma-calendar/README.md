@@ -6,6 +6,8 @@ React 화면에서 날짜별 일정을 조회·추가·삭제하고 Supabase Pos
 
 실제 CAPTCHA·익명 로그인·DB 저장·브라우저 간 동기화·재시작 후 재인증을 확인했습니다. 토큰 갱신과 1시간 상한은 실제 Auth에 제어한 서버 시계를 연결해 추가 검증했습니다. 새로운 작업 환경에서는 아래 초기 설정이 필요합니다. [검증 결과와 제한](docs/verification.md)을 확인하세요.
 
+설계부터 구현·인증·Vercel 배포까지의 과정과 플랫폼 연결은 [프로젝트 학습 가이드](docs/project-learning-guide.md)에 정리했습니다.
+
 ## 초기 설정 — Windows PowerShell
 
 Node.js 24 이상이 필요합니다. 도구 준비 스크립트가 [공식 Windows 바이너리](https://www.postgresql.org/download/windows/)의 PostgreSQL 17.11 psql 클라이언트와 [Supabase Studio의 공식 공개 CA](https://github.com/supabase/supabase/blob/master/apps/studio/hooks/custom-content/custom-content.json)를 프로젝트 내부에 준비합니다. DB 서버·Windows 서비스·전역 PATH는 설치하지 않습니다. 최초 준비는 약 382MB를 내려받으며 이후 캐시를 재사용합니다.

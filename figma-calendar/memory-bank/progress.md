@@ -1,5 +1,9 @@
 # 진행 — 2026-10-09
 
+## 문서: 설계·구현·배포 학습 가이드
+
+사용자 요청으로 [프로젝트 학습 가이드](../docs/project-learning-guide.md)를 작성했다. 초기 계획과 현재 구조의 차이, 플랫폼별 연결, API 진입점과 Vercel 함수 패키징, 인증·세션·CRUD, 환경 설정, 개발·배포·검증 순서를 실제 코드와 기존 기록을 바탕으로 설명한다. README에 진입 링크를 추가했다. 문서 링크·코드 블록·인코딩·공백, 보안 검사와 Git diff 검사를 통과했다. 이번 작업은 문서 변경이며 앱·DB·운영 설정은 변경하지 않았다. [검증 기록](../docs/verification.md)에 이번 문서 검사와 기존 런타임 검증을 구분했다.
+
 ## 현재: Vercel API 수정 배포 및 실제 로그인 확인
 
 사용자의 환경 변수·도메인 등록 이후 나머지 수정 승인을 받아 API Node 함수, HTTPS Origin/Host 검사, Secure 쿠키, DB 공유 세션/요청 한도, AES-256-GCM Auth 토큰 암호화, Vercel 5초 재조회, 공개 CSP를 구현해 Production에 배포했다. 기존 로컬 SSE와 events 권한·데이터는 유지한다. CALENDAR_ORIGIN과 무작위 CALENDAR_SESSION_SECRET만 Production에 추가하고 기존 7개 환경 값은 보존했다.

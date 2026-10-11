@@ -1,0 +1,60 @@
+<!doctype html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>10-4 Runtime Error Lab</title>
+    <link
+      rel="icon"
+      type="image/svg+xml"
+      href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%23111827'/%3E%3Cpath d='m9 10 6 6-6 6m8 0h6' fill='none' stroke='%23fff' stroke-width='3'/%3E%3C/svg%3E"
+    />
+    <link rel="stylesheet" href="./src/styles.css" />
+  </head>
+  <body>
+    <main class="app-shell">
+      <section class="hero">
+        <p class="eyebrow">Chrome DevTools MCP Lab</p>
+        <h1>오늘의 Codex 미션 보드</h1>
+        <p>
+          이 앱은 강의용으로 일부러 런타임 에러를 포함하고 있습니다.
+          콘솔을 보고 원인을 찾아 수정하는 것이 목표입니다.
+        </p>
+      </section>
+
+      <section class="dashboard" aria-label="오늘의 미션 대시보드">
+        <article class="featured-card">
+          <p class="card-label">추천 미션</p>
+          <h2 data-featured-title>불러오는 중...</h2>
+          <p data-featured-summary>추천 미션 설명을 준비하고 있습니다.</p>
+          <dl class="meta-grid">
+            <div>
+              <dt>예상 시간</dt>
+              <dd data-featured-minutes>-</dd>
+            </div>
+            <div>
+              <dt>난이도</dt>
+              <dd data-featured-level>-</dd>
+            </div>
+          </dl>
+        </article>
+
+        <aside class="side-panel">
+          <p class="card-label">상태</p>
+          <strong data-total-count>0</strong>
+          <span>개의 미션을 불러왔습니다</span>
+        </aside>
+      </section>
+
+      <section class="mission-section" aria-label="미션 목록">
+        <div class="section-heading">
+          <h2>미션 목록</h2>
+          <p>런타임 에러가 해결되면 이 목록이 렌더링됩니다.</p>
+        </div>
+        <div class="mission-list" data-mission-list></div>
+      </section>
+    </main>
+
+    <script type="module" src="./src/app.js"></script>
+  </body>
+</html>

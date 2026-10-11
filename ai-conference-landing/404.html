@@ -1,0 +1,675 @@
+<!doctype html>
+<html lang="ko">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content="페이지를 찾지 못했나요? AIIC 2026 아케이드에서 스네이크 게임을 즐겨 보세요." />
+    <title>404 | AIIC 2026 Arcade</title>
+    <style>
+      :root {
+        color-scheme: dark;
+        --error-accent: #00d4ff;
+        --error-text: #f4f8fb;
+        --error-muted: #adc0cc;
+        --error-border: #294654;
+      }
+
+      *,
+      *::before,
+      *::after {
+        box-sizing: border-box;
+      }
+
+      .error-page {
+        min-height: 100vh;
+        margin: 0;
+        background: radial-gradient(circle at 70% 28%, #113a4b 0%, #0b1822 38%, #080e16 78%);
+        color: var(--error-text);
+        font-family: Inter, "Noto Sans KR", Arial, sans-serif;
+        line-height: 1.55;
+      }
+
+      .error-page__header,
+      .error-page__main,
+      .error-page__footer {
+        width: min(100% - 2.5rem, 1160px);
+        margin-inline: auto;
+      }
+
+      .error-page__header {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 1rem;
+        min-height: 76px;
+        border-bottom: 1px solid var(--error-border);
+      }
+
+      .error-page__brand {
+        color: var(--error-accent);
+        font-size: 1.05rem;
+        font-weight: 800;
+        letter-spacing: .08em;
+        text-decoration: none;
+      }
+
+      .error-page__header-label,
+      .error-page__eyebrow,
+      .snake-game__eyebrow {
+        color: var(--error-accent);
+        font-size: .76rem;
+        font-weight: 800;
+        letter-spacing: .17em;
+        text-transform: uppercase;
+      }
+
+      .error-page__header-label {
+        margin: 0;
+      }
+
+      .error-page__main {
+        display: grid;
+        grid-template-columns: minmax(0, .82fr) minmax(0, 1fr);
+        align-items: center;
+        gap: clamp(2rem, 6vw, 6rem);
+        padding-block: clamp(2.75rem, 7vw, 6rem);
+      }
+
+      .error-page__eyebrow {
+        margin: 0 0 1rem;
+      }
+
+      .error-page__number {
+        display: block;
+        margin-bottom: .5rem;
+        background: linear-gradient(135deg, #f4f8fb 10%, #00d4ff 78%);
+        background-clip: text;
+        color: transparent;
+        font-size: clamp(6.5rem, 17vw, 13rem);
+        font-weight: 900;
+        letter-spacing: -.09em;
+        line-height: .9;
+      }
+
+      .error-page__title {
+        max-width: 12ch;
+        margin: 1.4rem 0 1rem;
+        font-size: clamp(2rem, 4vw, 3.3rem);
+        letter-spacing: -.045em;
+        line-height: 1.18;
+      }
+
+      .error-page__description {
+        max-width: 38ch;
+        margin: 0 0 2rem;
+        color: var(--error-muted);
+      }
+
+      .error-page__home,
+      .snake-game__button {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        min-height: 45px;
+        border: 1px solid var(--error-accent);
+        border-radius: .4rem;
+        padding: .65rem 1rem;
+        background: var(--error-accent);
+        color: #06151d;
+        font: inherit;
+        font-weight: 800;
+        text-decoration: none;
+        cursor: pointer;
+      }
+
+      .error-page__home:hover,
+      .snake-game__button:hover:not(:disabled) {
+        box-shadow: 0 0 22px #00d4ff70;
+        transform: translateY(-2px);
+      }
+
+      .error-page__home:focus-visible,
+      .error-page__brand:focus-visible,
+      .snake-game__button:focus-visible,
+      .snake-game__direction:focus-visible {
+        outline: 2px solid #fff;
+        outline-offset: 4px;
+      }
+
+      .snake-game {
+        width: 100%;
+        border: 1px solid #3b6474;
+        border-radius: 1.2rem;
+        padding: clamp(1rem, 3vw, 1.75rem);
+        background: linear-gradient(145deg, #122a38, #0b1822 75%);
+        box-shadow: 0 30px 80px #0007, inset 0 1px #ffffff12;
+      }
+
+      .snake-game__header {
+        display: flex;
+        align-items: flex-end;
+        justify-content: space-between;
+        gap: 1rem;
+        margin-bottom: 1rem;
+      }
+
+      .snake-game__eyebrow {
+        margin: 0 0 .2rem;
+      }
+
+      .snake-game__title {
+        margin: 0;
+        font-size: clamp(1.4rem, 3vw, 2rem);
+        line-height: 1.2;
+      }
+
+      .snake-game__score {
+        min-width: 5.5rem;
+        border: 1px solid var(--error-border);
+        border-radius: .6rem;
+        padding: .35rem .75rem;
+        background: #09151f;
+        text-align: right;
+      }
+
+      .snake-game__score-label {
+        display: block;
+        color: var(--error-muted);
+        font-size: .7rem;
+        font-weight: 700;
+        letter-spacing: .12em;
+        text-transform: uppercase;
+      }
+
+      .snake-game__score-value {
+        color: var(--error-accent);
+        font-size: 1.7rem;
+        font-variant-numeric: tabular-nums;
+        font-weight: 800;
+        line-height: 1.1;
+      }
+
+      .snake-game__board-frame {
+        position: relative;
+        width: min(100%, 420px);
+        margin-inline: auto;
+        overflow: hidden;
+        border: 1px solid #2b5364;
+        border-radius: .65rem;
+        background: #07131d;
+        box-shadow: inset 0 0 35px #0008;
+      }
+
+      .snake-game__board {
+        display: block;
+        width: 100%;
+        height: auto;
+        aspect-ratio: 1;
+      }
+
+      .snake-game__overlay {
+        position: absolute;
+        inset: 0;
+        display: grid;
+        align-content: center;
+        justify-items: center;
+        gap: .35rem;
+        padding: 1.5rem;
+        background: #06131cbd;
+        text-align: center;
+      }
+
+      .snake-game__overlay[hidden] {
+        display: none;
+      }
+
+      .snake-game__overlay-title {
+        margin: 0;
+        color: #fff;
+        font-size: clamp(1.5rem, 5vw, 2.3rem);
+        font-weight: 800;
+      }
+
+      .snake-game__overlay-hint {
+        max-width: 25ch;
+        margin: 0;
+        color: #b9d5dd;
+        font-size: .9rem;
+      }
+
+      .snake-game__status {
+        min-height: 1.6rem;
+        margin: .85rem 0 1rem;
+        color: #c0e8f2;
+        font-size: .9rem;
+        text-align: center;
+      }
+
+      .snake-game__actions {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: .55rem;
+        margin-bottom: 1rem;
+      }
+
+      .snake-game__button {
+        min-width: 6.5rem;
+      }
+
+      .snake-game__button--secondary {
+        border-color: #4d7989;
+        background: #153545;
+        color: #e3f7fa;
+      }
+
+      .snake-game__button:disabled {
+        cursor: not-allowed;
+        opacity: .45;
+      }
+
+      .snake-game__instructions {
+        margin: 1rem 0 0;
+        color: var(--error-muted);
+        font-size: .8rem;
+        text-align: center;
+      }
+
+      .snake-game__touch-controls {
+        display: none;
+      }
+
+      .snake-game__noscript {
+        display: block;
+        margin-top: 1rem;
+        color: var(--error-muted);
+        text-align: center;
+      }
+
+      .error-page__footer {
+        border-top: 1px solid var(--error-border);
+        padding-block: 1.25rem;
+        color: #8299a6;
+        font-size: .78rem;
+      }
+
+      .error-page__footer-text {
+        margin: 0;
+      }
+
+      @media (max-width: 800px) {
+        .error-page__main {
+          grid-template-columns: 1fr;
+          gap: 2.5rem;
+        }
+
+        .error-page__intro {
+          text-align: center;
+        }
+
+        .error-page__title,
+        .error-page__description {
+          max-width: none;
+        }
+
+        .snake-game {
+          max-width: 560px;
+          margin-inline: auto;
+        }
+
+        .snake-game__touch-controls {
+          display: grid;
+          grid-template-columns: repeat(3, 3.25rem);
+          justify-content: center;
+          gap: .4rem;
+          margin-top: 1rem;
+        }
+
+        .snake-game__direction {
+          min-height: 3.25rem;
+          border: 1px solid #4d7989;
+          border-radius: .45rem;
+          background: #153545;
+          color: #e3f7fa;
+          font: inherit;
+          font-size: 1.3rem;
+          font-weight: 800;
+          touch-action: manipulation;
+          cursor: pointer;
+        }
+
+        .snake-game__direction--up {
+          grid-column: 2;
+        }
+
+        .snake-game__direction--left {
+          grid-column: 1;
+        }
+
+        .snake-game__direction--down {
+          grid-column: 2;
+        }
+
+        .snake-game__direction--right {
+          grid-column: 3;
+        }
+      }
+
+      @media (max-width: 480px) {
+        .error-page__header,
+        .error-page__main,
+        .error-page__footer {
+          width: min(100% - 1.5rem, 1160px);
+        }
+
+        .error-page__header-label {
+          font-size: .65rem;
+        }
+
+        .error-page__main {
+          padding-block: 2.5rem;
+        }
+
+        .error-page__number {
+          font-size: clamp(6rem, 30vw, 9rem);
+        }
+
+        .snake-game__button {
+          min-width: 0;
+          flex: 1 1 30%;
+          padding-inline: .5rem;
+          font-size: .85rem;
+        }
+      }
+
+      @media (prefers-reduced-motion: no-preference) {
+        .error-page__home,
+        .snake-game__button {
+          transition: box-shadow .2s ease, transform .2s ease;
+        }
+      }
+    </style>
+  </head>
+  <body class="error-page">
+    <header class="error-page__header">
+      <a class="error-page__brand" href="index.html" aria-label="AIIC 2026 홈으로">AIIC 2026</a>
+      <p class="error-page__header-label">SIGNAL LOST / ARCADE FOUND</p>
+    </header>
+
+    <main class="error-page__main">
+      <section class="error-page__intro" aria-labelledby="error-title">
+        <p class="error-page__eyebrow">Oops, wrong turn</p>
+        <span class="error-page__number" aria-hidden="true">404</span>
+        <h1 class="error-page__title" id="error-title">페이지를 찾지 못했어요.</h1>
+        <p class="error-page__description">길을 잃은 김에 잠깐 한 판 어떠세요? 아래 게임을 즐기거나 행사 페이지로 돌아갈 수 있어요.</p>
+        <a class="error-page__home" href="index.html">행사 페이지로 돌아가기 ↗</a>
+      </section>
+
+      <section class="snake-game" aria-labelledby="snake-title">
+        <div class="snake-game__header">
+          <div>
+            <p class="snake-game__eyebrow">404 Arcade / No. 01</p>
+            <h2 class="snake-game__title" id="snake-title">Signal Snake</h2>
+          </div>
+          <div class="snake-game__score" aria-label="현재 점수">
+            <span class="snake-game__score-label">Score</span>
+            <output class="snake-game__score-value" id="snake-score">00</output>
+          </div>
+        </div>
+
+        <div class="snake-game__actions">
+          <button class="snake-game__button" id="snake-start" type="button">시작</button>
+          <button class="snake-game__button snake-game__button--secondary" id="snake-pause" type="button" disabled>일시정지</button>
+          <button class="snake-game__button snake-game__button--secondary" id="snake-restart" type="button">다시 시작</button>
+        </div>
+
+        <div class="snake-game__board-frame">
+          <canvas class="snake-game__board" id="snake-board" width="400" height="400" role="img" aria-label="20칸 곱하기 20칸 스네이크 게임판">게임판을 표시할 수 없습니다.</canvas>
+          <div class="snake-game__overlay" id="snake-overlay" aria-hidden="true">
+            <p class="snake-game__overlay-title" id="snake-overlay-title">신호를 찾아보세요</p>
+            <p class="snake-game__overlay-hint" id="snake-overlay-hint">시작을 누르면 바로 게임이 시작됩니다.</p>
+          </div>
+        </div>
+
+        <p class="snake-game__status" id="snake-status" role="status" aria-live="polite">시작 버튼으로 게임을 시작하세요.</p>
+        <div class="snake-game__touch-controls" aria-label="터치 방향 조작">
+          <button class="snake-game__direction snake-game__direction--up" type="button" data-direction="up" aria-label="위로 이동">↑</button>
+          <button class="snake-game__direction snake-game__direction--left" type="button" data-direction="left" aria-label="왼쪽으로 이동">←</button>
+          <button class="snake-game__direction snake-game__direction--down" type="button" data-direction="down" aria-label="아래로 이동">↓</button>
+          <button class="snake-game__direction snake-game__direction--right" type="button" data-direction="right" aria-label="오른쪽으로 이동">→</button>
+        </div>
+        <p class="snake-game__instructions">방향키 또는 WASD로 이동 · 벽과 몸에 닿지 않고 먹이를 모으세요.</p>
+        <noscript class="snake-game__noscript">게임을 플레이하려면 JavaScript를 켜 주세요. 행사 페이지 링크는 그대로 사용할 수 있습니다.</noscript>
+      </section>
+    </main>
+
+    <footer class="error-page__footer">
+      <p class="error-page__footer-text">© 2026 AI Innovators Conference · 다시 길을 찾을 때까지 즐겨요.</p>
+    </footer>
+
+    <script>
+      (() => {
+        const gridSize = 20;
+        const cellSize = 20;
+        const tickMs = 180;
+        const directions = {
+          up: { x: 0, y: -1 },
+          down: { x: 0, y: 1 },
+          left: { x: -1, y: 0 },
+          right: { x: 1, y: 0 },
+        };
+        const keys = {
+          ArrowUp: "up", w: "up",
+          ArrowDown: "down", s: "down",
+          ArrowLeft: "left", a: "left",
+          ArrowRight: "right", d: "right",
+        };
+
+        const canvas = document.querySelector("#snake-board");
+        const startButton = document.querySelector("#snake-start");
+        const pauseButton = document.querySelector("#snake-pause");
+        const restartButton = document.querySelector("#snake-restart");
+        const scoreOutput = document.querySelector("#snake-score");
+        const status = document.querySelector("#snake-status");
+        const overlay = document.querySelector("#snake-overlay");
+        const overlayTitle = document.querySelector("#snake-overlay-title");
+        const overlayHint = document.querySelector("#snake-overlay-hint");
+        const context = canvas.getContext("2d");
+
+        if (!context) {
+          startButton.disabled = true;
+          pauseButton.disabled = true;
+          restartButton.disabled = true;
+          status.textContent = "이 브라우저에서는 게임판을 표시할 수 없습니다.";
+          return;
+        }
+
+        let snake;
+        let direction;
+        let queuedDirection;
+        let food;
+        let score;
+        let state = "ready";
+        let timer = null;
+
+        function placeFood() {
+          const emptyCells = [];
+          for (let y = 0; y < gridSize; y += 1) {
+            for (let x = 0; x < gridSize; x += 1) {
+              if (!snake.some((segment) => segment.x === x && segment.y === y)) {
+                emptyCells.push({ x, y });
+              }
+            }
+          }
+          return emptyCells.length ? emptyCells[Math.floor(Math.random() * emptyCells.length)] : null;
+        }
+
+        function resetGame() {
+          snake = [{ x: 5, y: 10 }, { x: 4, y: 10 }, { x: 3, y: 10 }];
+          direction = "right";
+          queuedDirection = null;
+          score = 0;
+          food = placeFood();
+          scoreOutput.textContent = "00";
+          drawBoard();
+        }
+
+        function drawBoard() {
+          context.fillStyle = "#07131d";
+          context.fillRect(0, 0, canvas.width, canvas.height);
+          context.strokeStyle = "#16313e";
+          context.lineWidth = 1;
+          for (let line = 1; line < gridSize; line += 1) {
+            const offset = line * cellSize + .5;
+            context.beginPath();
+            context.moveTo(offset, 0);
+            context.lineTo(offset, canvas.height);
+            context.moveTo(0, offset);
+            context.lineTo(canvas.width, offset);
+            context.stroke();
+          }
+
+          if (food) {
+            const centerX = food.x * cellSize + cellSize / 2;
+            const centerY = food.y * cellSize + cellSize / 2;
+            context.fillStyle = "#ff9a68";
+            context.shadowColor = "#ff743b";
+            context.shadowBlur = 16;
+            context.beginPath();
+            context.arc(centerX, centerY, 6.5, 0, Math.PI * 2);
+            context.fill();
+            context.shadowBlur = 0;
+          }
+
+          snake.forEach((segment, index) => {
+            context.fillStyle = index === 0 ? "#c0fff0" : "#00d4ff";
+            context.fillRect(segment.x * cellSize + 2, segment.y * cellSize + 2, cellSize - 4, cellSize - 4);
+          });
+        }
+
+        function updateUI(message = "") {
+          startButton.disabled = state === "playing" || state === "paused";
+          pauseButton.disabled = state !== "playing" && state !== "paused";
+          pauseButton.textContent = state === "paused" ? "계속하기" : "일시정지";
+          overlay.hidden = state === "playing";
+
+          if (state === "ready") {
+            overlayTitle.textContent = "신호를 찾아보세요";
+            overlayHint.textContent = "시작을 누르면 바로 게임이 시작됩니다.";
+            status.textContent = "시작 버튼으로 게임을 시작하세요.";
+          } else if (state === "playing") {
+            status.textContent = "게임 진행 중 · 방향키 또는 WASD로 이동하세요.";
+          } else if (state === "paused") {
+            overlayTitle.textContent = "잠시 멈춤";
+            overlayHint.textContent = "계속하기를 누르면 이어서 플레이합니다.";
+            status.textContent = message || "게임이 일시정지되었습니다.";
+          } else {
+            overlayTitle.textContent = state === "won" ? "모든 신호 수집 완료!" : "게임 종료";
+            overlayHint.textContent = "시작 또는 다시 시작을 눌러 도전하세요.";
+            status.textContent = state === "won" ? `완벽해요! 최종 점수 ${score}점.` : `게임 종료! 최종 점수 ${score}점.`;
+          }
+        }
+
+        function stopTimer() {
+          if (timer !== null) {
+            clearInterval(timer);
+            timer = null;
+          }
+        }
+
+        function runGame() {
+          stopTimer();
+          state = "playing";
+          updateUI();
+          timer = setInterval(step, tickMs);
+        }
+
+        function pauseGame(message) {
+          if (state !== "playing") return;
+          stopTimer();
+          state = "paused";
+          updateUI(message);
+        }
+
+        function queueTurn(nextDirection) {
+          if (state !== "playing" || queuedDirection !== null) return;
+          const current = directions[direction];
+          const next = directions[nextDirection];
+          if (!next || nextDirection === direction || current.x + next.x === 0 && current.y + next.y === 0) return;
+          queuedDirection = nextDirection;
+        }
+
+        function step() {
+          if (queuedDirection !== null) {
+            direction = queuedDirection;
+            queuedDirection = null;
+          }
+
+          const vector = directions[direction];
+          const head = { x: snake[0].x + vector.x, y: snake[0].y + vector.y };
+          const ateFood = food && head.x === food.x && head.y === food.y;
+          const occupied = ateFood ? snake : snake.slice(0, -1);
+          const hitWall = head.x < 0 || head.x >= gridSize || head.y < 0 || head.y >= gridSize;
+          const hitBody = occupied.some((segment) => segment.x === head.x && segment.y === head.y);
+
+          if (hitWall || hitBody) {
+            stopTimer();
+            state = "gameover";
+            updateUI();
+            return;
+          }
+
+          snake.unshift(head);
+          if (ateFood) {
+            score += 1;
+            scoreOutput.textContent = String(score).padStart(2, "0");
+            food = placeFood();
+            if (food === null) {
+              stopTimer();
+              state = "won";
+              drawBoard();
+              updateUI();
+              return;
+            }
+          } else {
+            snake.pop();
+          }
+          drawBoard();
+        }
+
+        startButton.addEventListener("click", () => {
+          resetGame();
+          runGame();
+        });
+
+        restartButton.addEventListener("click", () => {
+          resetGame();
+          runGame();
+        });
+
+        pauseButton.addEventListener("click", () => {
+          if (state === "playing") pauseGame();
+          else if (state === "paused") runGame();
+        });
+
+        document.addEventListener("keydown", (event) => {
+          const nextDirection = keys[event.key];
+          if (!nextDirection || state !== "playing") return;
+          event.preventDefault();
+          queueTurn(nextDirection);
+        });
+
+        document.querySelectorAll("[data-direction]").forEach((button) => {
+          button.addEventListener("click", () => queueTurn(button.dataset.direction));
+        });
+
+        document.addEventListener("visibilitychange", () => {
+          if (document.hidden) pauseGame("탭을 벗어나 게임이 자동으로 일시정지되었습니다.");
+        });
+
+        resetGame();
+        updateUI();
+      })();
+    </script>
+  </body>
+</html>

@@ -1,0 +1,88 @@
+<!doctype html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#f7f8f4" />
+    <meta name="description" content="하나의 집중 목표와 작은 할 일들로 만드는 나만의 하루. 오늘의 집중 보드." />
+    <title>오늘의 집중 보드</title>
+    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 40 40'%3E%3Crect width='40' height='40' rx='12' fill='%23365042'/%3E%3Cpath d='M12 27C12 14 19 11 29 11C29 23 22 29 12 27ZM12 27L23 17' fill='none' stroke='%23edf4df' stroke-width='2'/%3E%3C/svg%3E" />
+    <link rel="stylesheet" href="styles.css" />
+    <script src="script.js" defer></script>
+  </head>
+  <body>
+    <main class="board">
+      <header class="page-header">
+        <div class="brand">
+          <span class="brand-mark" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none"><path d="M5 19C5 9 10 5 19 5c0 9-4 14-14 14Zm0 0L15 9" /></svg>
+          </span>
+          <span>나만의 작은 보드</span>
+        </div>
+        <div class="date-line">
+          <span class="date-dot" aria-hidden="true"></span>
+          <time id="today-date"></time>
+        </div>
+        <h1>오늘의 집중 보드<span class="title-dot">.</span></h1>
+        <p class="intro">중요한 일 하나, 작은 실천 몇 가지.<br class="mobile-break" /> 나의 속도로 하루를 채워요.</p>
+      </header>
+
+      <section class="focus-card" aria-labelledby="focus-heading">
+        <div class="section-eyebrow"><span aria-hidden="true">01</span> 오늘의 중심</div>
+        <h2 id="focus-heading"><label for="focus-input">오늘은 무엇에 집중할까요?</label></h2>
+        <textarea id="focus-input" rows="2" placeholder="가장 집중하고 싶은 일 하나를 적어보세요." aria-describedby="focus-hint" spellcheck="false"></textarea>
+        <div class="focus-footer">
+          <p id="focus-hint">많이 하지 않아도 괜찮아요. 하나면 충분해요.</p>
+          <span class="focus-decoration" aria-hidden="true">✳</span>
+        </div>
+      </section>
+
+      <section class="tasks-card" aria-labelledby="tasks-heading">
+        <div class="tasks-heading-row">
+          <div>
+            <div class="section-eyebrow"><span aria-hidden="true">02</span> 작은 실천</div>
+            <h2 id="tasks-heading">차근차근, 할 일</h2>
+          </div>
+          <span id="task-count" class="task-count">0개</span>
+        </div>
+        <form id="task-form" novalidate>
+          <label for="task-input" class="visually-hidden">새로운 할 일</label>
+          <div class="task-entry">
+            <input id="task-input" type="text" placeholder="작은 할 일 하나를 추가해 보세요" autocomplete="off" aria-describedby="task-error" />
+            <button class="add-button" type="submit"><span aria-hidden="true">＋</span> 추가</button>
+          </div>
+          <p id="task-error" class="input-error" role="status" hidden></p>
+        </form>
+        <ul id="task-list" class="task-list" aria-label="할 일 목록"></ul>
+        <div id="empty-state" class="empty-state">
+          <div class="empty-illustration" aria-hidden="true">
+            <svg viewBox="0 0 72 72" fill="none">
+              <rect x="19" y="13" width="36" height="48" rx="5" transform="rotate(8 37 37)" />
+              <path d="m27 29 3 3 5-6m4 5 8 1m-21 10 3 3 5-6m4 5 8 1M10 17v8m-4-4h8m44 32v8m-4-4h8" />
+            </svg>
+          </div>
+          <h3>아직은 비어 있는 오늘의 목록</h3>
+          <p>물 한 잔 마시기처럼 작은 일도 좋아요.<br />가벼운 첫걸음을 적어볼까요?</p>
+        </div>
+        <p class="list-hint"><span aria-hidden="true">✓</span> 끝낸 일은 체크하며 하나씩 정리해요.</p>
+      </section>
+
+      <footer class="page-footer">
+        <p class="save-status"><span id="save-dot" class="save-dot" aria-hidden="true"></span><span id="save-status">변경한 내용은 자동으로 저장돼요</span></p>
+        <p id="storage-message" class="storage-message" role="status" hidden></p>
+        <p class="closing-note">오늘도, 나의 속도로.</p>
+      </footer>
+      <p id="action-message" class="visually-hidden" role="status" aria-atomic="true"></p>
+      <noscript><p class="storage-message">보드를 사용하려면 브라우저에서 JavaScript를 켜 주세요.</p></noscript>
+    </main>
+    <template id="task-template">
+      <li class="task-item">
+        <label class="task-label"><input class="task-checkbox" type="checkbox" /><span class="task-text"></span></label>
+        <button class="delete-button" type="button" title="할 일 삭제">
+          <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M5 7h14M9 7V4h6v3M7 7l1 13h8l1-13M10 11v5m4-5v5" /></svg>
+          <span class="visually-hidden">삭제</span>
+        </button>
+      </li>
+    </template>
+  </body>
+</html>

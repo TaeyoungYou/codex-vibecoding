@@ -1,5 +1,9 @@
 # 이슈 — 2026-10-09
 
+## 문서 보완: 플랫폼 연결과 백엔드 배포 설명
+
+`api`의 짧은 재내보내기와 실제 `server` 구현의 관계, 프런트엔드 빌드와 Vercel 함수 패키징, Auth·앱 세션·DB 역할의 차이를 [학습 가이드](../docs/project-learning-guide.md)에 정리했다. 새로운 런타임 이슈를 발견하거나 기존 미검증 항목을 완료로 바꾸는 작업은 아니다.
+
 ## 해결: Vercel 공개 배포 API 404·세션 공유·공개 Host
 
 사용자 승인으로 Node API 함수·정확한 HTTPS Origin·Secure 쿠키·암호화된 DB 공유 세션·요청 한도·5초 재조회·정적 보안 헤더를 추가해 배포했다. session 200, 미인증 events 401, 잘못된 CAPTCHA 400을 확인했고 사용자 일반 브라우저에서 실제 CAPTCHA 후 캘린더가 열린다. 실제 인증된 events GET 200도 CLI 로그에서 확인했다. 기존 일정 4개와 내용 보존, 자동 테스트 66개 및 실제 runtime DB/mock Auth 교차 서버 검사 통과.

@@ -1,0 +1,86 @@
+<!doctype html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#f7f5ef" />
+    <title>오늘의 기록 | 작은 일기장</title>
+    <link rel="stylesheet" href="./styles.css" />
+    <script src="./app.js" defer></script>
+  </head>
+  <body>
+    <div class="page">
+      <header class="site-header">
+        <a class="site-header__brand" href="#top">오늘의 기록<span class="site-header__brand-mark" aria-hidden="true">.</span></a>
+        <span class="site-header__date" id="today-date"></span>
+      </header>
+
+      <main class="main" id="top">
+        <section class="intro" aria-labelledby="intro-title">
+          <p class="intro__eyebrow">나를 위한 조용한 시간</p>
+          <h1 class="intro__title" id="intro-title">오늘의 마음을<br />짧게 남겨요.</h1>
+          <p class="intro__description">크고 특별한 일이 아니어도 괜찮아요.<br />지금의 나를 있는 그대로 적어보세요.</p>
+        </section>
+
+        <div class="workspace">
+          <section class="editor" aria-labelledby="editor-title">
+            <div class="editor__heading">
+              <p class="editor__eyebrow">WRITE TODAY</p>
+              <h2 class="editor__title" id="editor-title">오늘의 일기</h2>
+            </div>
+
+            <form class="diary-form" id="diary-form" novalidate>
+              <fieldset class="mood-picker">
+                <legend class="mood-picker__legend">지금 기분은 어떤가요?</legend>
+                <div class="mood-picker__options">
+                  <div class="mood-picker__option">
+                    <input class="mood-picker__input" type="radio" name="mood" id="mood-good" value="좋음" />
+                    <label class="mood-picker__label" for="mood-good"><span aria-hidden="true">☀</span> 좋음</label>
+                  </div>
+                  <div class="mood-picker__option">
+                    <input class="mood-picker__input" type="radio" name="mood" id="mood-okay" value="보통" />
+                    <label class="mood-picker__label" for="mood-okay"><span aria-hidden="true">☁</span> 보통</label>
+                  </div>
+                  <div class="mood-picker__option">
+                    <input class="mood-picker__input" type="radio" name="mood" id="mood-hard" value="힘듦" />
+                    <label class="mood-picker__label" for="mood-hard"><span aria-hidden="true">☂</span> 힘듦</label>
+                  </div>
+                </div>
+              </fieldset>
+
+              <div class="diary-form__field">
+                <label class="diary-form__label" for="diary-content">오늘은 어떤 하루였나요?</label>
+                <textarea class="diary-form__textarea" id="diary-content" name="content" placeholder="오늘 기억하고 싶은 순간을 적어보세요."></textarea>
+              </div>
+
+              <div class="diary-form__footer">
+                <p class="diary-form__hint">한 문장만 적어도 충분해요.</p>
+                <button class="diary-form__submit" type="submit" id="save-button">일기 저장하기 <span aria-hidden="true">→</span></button>
+              </div>
+              <p class="diary-form__status" id="form-status" role="status" aria-live="polite"></p>
+            </form>
+          </section>
+
+          <section class="entries" aria-labelledby="entries-title">
+            <div class="entries__heading">
+              <div>
+                <p class="entries__eyebrow">MY DAYS</p>
+                <h2 class="entries__title" id="entries-title">쌓여가는 하루</h2>
+              </div>
+              <span class="entries__count" id="entry-count">0개의 기록</span>
+            </div>
+
+            <div class="empty-state" id="empty-state">
+              <span class="empty-state__symbol" aria-hidden="true">✳</span>
+              <h3 class="empty-state__title" id="empty-title">아직 적은 일기가 없어요.</h3>
+              <p class="empty-state__description" id="empty-description">오늘의 작은 이야기를 남기며<br />첫 페이지를 시작해 보세요.</p>
+            </div>
+            <ol class="entry-list" id="entry-list" hidden></ol>
+          </section>
+        </div>
+      </main>
+
+      <footer class="site-footer">이곳의 기록은 지금 사용 중인 브라우저에 저장됩니다.</footer>
+    </div>
+  </body>
+</html>
