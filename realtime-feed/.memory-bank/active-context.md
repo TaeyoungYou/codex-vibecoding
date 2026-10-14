@@ -5,6 +5,8 @@
 [GitHub push와 Vercel 자동 배포][git-integration]는 `in progress`다.
 사용자가 명시 요청했다. 방명록 관련 완료 작업과 기록을 동기화하고,
 전용 프로젝트의 Root Directory·Git 연결·실제 자동 배포를 확인한다.
+첫 소스 push와 원격 main 일치, Root Directory·Git 저장소·운영 브랜치 연결은 확인했다.
+다음은 실제 자동 배포의 커밋·Ready·공개 화면 검증이다.
 
 [공개 운영 배포][production]는 `done`이다.
 사용자의 미리보기 확인 후 같은 앱을 Production 환경으로 배포했다.

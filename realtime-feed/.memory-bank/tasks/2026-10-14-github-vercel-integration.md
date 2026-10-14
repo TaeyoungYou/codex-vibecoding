@@ -27,7 +27,13 @@
 완료된 운영 배포와 최신 메모리를 확인했다.
 현재 main은 원격보다 기존 방명록 문서 커밋 4개가 앞서 있으며 분기 차이는 없다.
 방명록 구현·설정·메모리는 아직 대부분 untracked다.
-다음은 선택한 파일의 값 검사와 GitHub 동기화, 전용 Git 배포 설정이다.
+관련 파일 88개를 선택해 실제 연결 값·작업자 비밀·OIDC 값과 경로 경계를 검사했다.
+값 발견 0개이며 기존 메모리 스킬 계획의 줄 끝 공백 한 곳만 정리했다.
+staged diff 검사를 통과한 `1011005`로 첫 push를 완료했고 원격 main과 일치한다.
+전용 Vercel의 Root Directory·Vite·Node.js 24·빌드·출력을 설정했다.
+GitHub 저장소 연결과 운영 브랜치 main을 실제 조회로 확인했다.
+README에 자동 배포 사용 방법과 기존 CLI 절차의 적용 시점을 구분했다.
+다음은 기록 변경을 push해 자동 배포의 커밋·Ready·공개 화면을 확인하는 것이다.
 
 [prd]: ../../docs/superpowers/specs/2026-10-11-realtime-guestbook-design.md
 [plan]: ../../docs/superpowers/plans/2026-10-11-realtime-guestbook.md

@@ -152,13 +152,37 @@ select cron.schedule(
 현재 [운영 사이트][production]는 Vercel 로그인 없이 접속할 수 있습니다.
 [미리보기 사이트][preview]는 Vercel 로그인 보호를 유지합니다.
 Production 공개 변수 3개를 등록하고 운영 환경으로 새로 빌드했습니다.
-Git 자동 배포 연결은 아직 진행하지 않았습니다.
+GitHub 저장소와 Vercel 자동 배포를 연결했습니다.
 검증용 게시물·미디어는 정리했고 기존 게시물은 보존했습니다.
+
+### GitHub 자동 배포
+
+[GitHub의 방명록 소스][github-source]를 전용 Vercel 프로젝트에 연결했습니다.
+Root Directory는 `realtime-feed`, 운영 브랜치는 `main`입니다.
+Vite·Node.js 24·`npm ci`·`npm run build`·출력 `dist`를 사용합니다.
+`main`에 push하면 운영 주소에 자동 배포되고, 다른 브랜치는 보호된 미리보기를 생성합니다.
+실제 배포 상태와 연결된 커밋은 Vercel Dashboard 또는 CLI에서 확인합니다.
+
+아래는 README를 수정한 경우의 예시입니다. 실제 수정한 파일만 선택합니다.
+
+```powershell
+git status --short
+git add -- README.md
+git diff --cached --check
+git commit -m "docs: update guestbook guide"
+git push origin main
+```
+
+환경 변수는 Vercel에 보관하고 `.env` 파일·토큰·빌드·브라우저 검증 산출물은 올리지 않습니다.
+Git 연결은 Vercel 프런트 배포만 자동화합니다.
+Supabase 마이그레이션·Edge Function·비밀 변경은 별도 확인과 적용이 필요합니다.
+
+### 초기 CLI 배포 이력
 
 Vercel CLI 64.0.2와 Node.js 24를 사용합니다.
 `vercel.json`은 Vite·`npm ci`·`npm run build`·`dist`를 명시합니다.
-현재 폴더에서 CLI로 올릴 때 Root Directory는 프로젝트 루트입니다.
-향후 부모 Git 저장소를 연결할 때는 Root Directory를 `realtime-feed`로 지정합니다.
+아래 명령은 Git 연결 전, 현재 폴더를 프로젝트 루트로 올렸던 초기 절차입니다.
+현재 연결 상태에서는 위 GitHub push 절차와 Root Directory `realtime-feed`를 사용합니다.
 
 ```powershell
 $guestbookVercelScope = Read-Host "방명록을 배포할 Vercel 팀 slug"
@@ -203,7 +227,7 @@ npx.cmd --yes vercel@64.0.2 deploy --prod --no-wait `
 미리보기 보호가 있다면 유지한 채 인증된 접근을 사용합니다.
 현재 인증은 URL 리디렉션 없는 익명 방식입니다.
 이메일·OAuth를 추가한다면 Supabase Site URL과 허용 리디렉션도 별도로 맞춥니다.
-Git 자동 배포는 저장소 연결·Root Directory·배포 브랜치 확인 뒤 설정합니다.
+Git 자동 배포 연결 시 저장소·Root Directory·배포 브랜치를 확인했습니다.
 
 [Vercel의 Vite 안내](https://vercel.com/docs/frameworks/frontend/vite)와
 [환경 변수 안내](https://vercel.com/docs/environment-variables)를 참고합니다.
@@ -261,3 +285,4 @@ E2E는 Chromium과 테스트 응답으로 실패 초안·재시도·충돌·반�
 
 [preview]: https://realtime-feed-my97cyo7t-gukbaps-projects.vercel.app
 [production]: https://realtime-feed-henna.vercel.app
+[github-source]: https://github.com/TaeyoungYou/codex-vibecoding/tree/main/realtime-feed
