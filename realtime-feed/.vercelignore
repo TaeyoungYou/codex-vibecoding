@@ -1,0 +1,17 @@
+.git/
+.env
+.env.*
+*.local
+node_modules/
+dist/
+.agents/
+.memory-bank/
+.playwright-mcp/
+.superpowers/
+docs/
+tests/
+supabase/
+test-results/
+playwright-report/
+playwright*.config.ts
+*.md

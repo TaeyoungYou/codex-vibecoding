@@ -1,0 +1,5 @@
+/* Radix states used by the generated shadcn components. */
+@custom-variant data-open (&[data-state="open"]);
+@custom-variant data-closed (&[data-state="closed"]);
+@custom-variant data-disabled (&[data-disabled]);
+@custom-variant data-inset (&[data-inset="true"]);

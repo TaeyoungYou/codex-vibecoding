@@ -124,6 +124,7 @@ expect(afterDeniedUpdate.data).toEqual(beforeDeniedUpdate.data)
 expect(rowsForEntry).toHaveLength(1)
 expect(afterConflict.data).toEqual(beforeConflict.data)
 ```
+
 - [ ] Step 4: 공개 profiles·entries·entry_images·entry_drawings, 내부 drawing_strokes·media_assets·media_cleanup_jobs를 만든다. 획 JSON은 text로 저장해 JSON 유효성과 512 KiB를 검증한다. 예약된 새 entry UUID는 게시물 확정 전에도 보관 가능해야 한다. 큐 행은 게시물 삭제와 함께 cascade되지 않는다.
 - [ ] Step 5: RPC·RLS·GRANT·소유권 검증을 구현한다. 직접 DML로 서버 검증을 우회하지 못하게 한다. 필요한 권한 상승 함수에는 고정 search_path, auth.uid() 검사, PUBLIC 실행 권한 회수를 적용한다. 공개 조회와 본인만 가능한 프로필·편집용 조회를 분리한다. 작성 당시 이름은 서버가 프로필에서 가져온다.
 - [ ] Step 6: save_entry에서 소유권·version·이미지 5장·합계 5 MiB·그림·빈 게시물을 검증하고 관련 데이터와 version을 함께 확정한다. 실제 Storage 객체와 예약 레코드를 확인한 asset만 연결한다. 동일 ID의 신규 생성 재시도는 기존 글을 덮어쓰지 않고 conflict를 반환한다. 이미지 분리·게시물 삭제와 delete_pending 전환·삭제 작업 등록은 같은 트랜잭션에 넣는다.
@@ -146,6 +147,7 @@ expect(screen.getByRole('dialog')).toBeVisible()
 expect(screen.getByRole('textbox', {name: '내용'})).toHaveValue('남겨 둔 초안')
 expect(saveEntry).toHaveBeenCalledTimes(1)
 ```
+
 - [ ] Step 2: SDK 세션 유지와 Auth 변경 구독을 연결한다. 닉네임 검증 후 익명 로그인하며, 프로필만 실패하면 같은 계정으로 재시도한다. 복구 불가능한 세션에서 새 계정으로 무언중에 전환하지 않는다. 첫 닉네임 창을 닫고 공개 피드를 읽을 수 있게 한다.
 - [ ] Step 3: API와 중앙 피드·작성 모달·본인 메뉴를 연결한다. 빈 게시물 차단, 닉네임 변경, 삭제 확인, 조회 중·빈 피드·실패 상태를 포함한다. UUID는 제출 전에 생성하고 재시도에도 유지한다. 응답을 못 받은 경우 readEntry로 그 ID의 저장 결과를 확인한 후 재전송한다.
 - [ ] Step 4: 저장 중 닫기와 중복 제출을 막고, 성공한 뒤 창을 닫는다. 충돌 시 입력을 유지하고 최신 내용을 확인·다시 읽는 선택을 제공한다. 입력 중 창을 닫으면 버릴지 확인한다.
@@ -169,6 +171,7 @@ expect(ownerUpload.error).toBeNull()
 expect(otherUserUpload.error).not.toBeNull()
 expect(afterRejectedSave.data.images).toEqual(beforeRejectedSave.data.images)
 ```
+
 - [ ] Step 2: `npx.cmd supabase migration new guestbook_storage`로 migration을 생성한다. guestbook-media 버킷은 공개 조회·WebP·1 MiB로 설정한다. 예약된 본인 경로에 INSERT만 허용하며 덮어쓰기·직접 DELETE는 거절한다. 업로드 확인은 실제 Storage 메타데이터를 사용한다.
 - [ ] Step 3: 이미지 방향을 보존해 긴 변 1,600px 이하로 줄이고 WebP 품질을 단계적으로 낮춰 1 MiB에 맞춘다. 변환 불가·디코드 실패·목표 초과는 오류로 반환하고 원본을 서버에 보관하지 않는다. 불필요해진 Object URL을 해제한다.
 - [ ] Step 4: 이미지 추가·제거·교체·순서 변경을 연결한다. 새 파일들을 먼저 올린 후 한 번의 save_entry로 확정한다. 실패하면 기존 글을 유지하고 이미 올라간 asset은 초안에 보관해 재사용한다. 업로드 후 창 종료로 남은 asset은 24시간 이후 정리 대상이다.
@@ -196,6 +199,7 @@ const oversizedJson = JSON.stringify(oversized)
 expect(new TextEncoder().encode(oversizedJson).byteLength).toBeGreaterThan(524288)
 expect(parseDrawing(oversizedJson).ok).toBe(false)
 ```
+
 - [ ] Step 2: 정규화 좌표·재생·실행 취소 이력을 구현한다. 비정상 좌표나 너무 큰 JSON은 재생 전에 거절한다. 압력·레이어·redo는 추가하지 않는다.
 - [ ] Step 3: Pointer Events와 pointer capture로 마우스·터치·펜을 받는다. 한 번 찍은 점도 그리고 pointercancel을 처리한다. 캔버스에만 touch-action을 제한한다. 흰 배경, 색·굵기·지우개·취소·전체 지우기, 900×600 비율, 1 MiB 이하 WebP 미리보기를 구현한다.
 - [ ] Step 4: 본인 편집용 JSON에서 획을 복원한다. 완료는 초안에만 반영하고 게시물 저장 시 JSON과 미리보기를 함께 확정한다. 용량 초과로 그림을 지우지 않는다.
@@ -212,6 +216,13 @@ expect(parseDrawing(oversizedJson).ok).toBe(false)
 
 CleanupSettings의 기본값은 `maxJobs=20`, `budgetMs=20000`, `leaseSeconds=120`, `maxAttempts=5`, `retryDelaySeconds=[60,300,1800,7200]`, `unusedAgeHours=24`, `completedRetentionDays=7`이다. Cron은 매분, 파일 API 타임아웃은 10초다. 모두 설계에서 구현자에게 맡긴 운영값이며 사용자 지정값은 아니다.
 
+2026-10-14 확인한 선택 순서는 등록 순서의 FIFO다.
+실행 시각이 된 pending 또는 선점이 만료된 processing 작업 중 `created_at`이 가장 오래된 것을 선택한다.
+재시도 대기 중이거나 다른 작업자가 선점 중인 작업은 건너뛴다.
+재시도 때 원래 등록 시각을 유지하며 `next_attempt_at`은 처리 가능 여부만 판단한다.
+같은 등록 시각의 순서와 여러 작업자의 삭제 완료 순서는 보장하지 않는다.
+이 설명은 PRD 4.3절과 현재 구현을 맞춘 것이며 기존 마이그레이션을 재작성하지 않는다.
+
 - [ ] Step 1: `cleanupWorker.test.ts`에 `empty_queue_exits`, `failed_delete_schedules_retry`, `absent_file_completes`, `stale_claim_cannot_complete`를 작성한다. 빈 큐는 remove 0회, 첫 실패는 60초 재시도, absent는 완료 호출, 오래된 토큰 완료는 false가 기대 결과다. `cleanupQueue.test.ts`에는 동시 선점·롤백·선점 만료·삭제 직후 중단·시도 소진·24시간 미사용·현재 참조 보호를 각각 검증하는 테스트를 작성한다.
 
 ```ts
@@ -224,6 +235,7 @@ expect(firstClaim.id).not.toBe(secondClaim.id)
 expect(staleCompletion.data).toBe(false)
 expect(afterExhaustion.status).toBe('failed')
 ```
+
 - [ ] Step 2: 짧은 트랜잭션과 `FOR UPDATE SKIP LOCKED`로 대기 또는 선점 만료 작업을 가져온다. 시도 상한에 도달한 만료 작업도 failed로 옮긴다. 결과 반영에는 processing·claim_token·유효 기간 일치를 요구한다. pending의 next_attempt_at과 processing의 lease_until에 상태별 부분 인덱스를 둔다.
 - [ ] Step 3: DB 잠금이 끝난 뒤 Storage HTTP 삭제를 호출한다. 각 삭제 요청은 AbortSignal로 남은 실행 예산과 10초 중 짧은 시간 안에 중단하고, 예산이 소진되면 추가 선점을 멈춘다. 재첨부를 막는 delete_pending 상태와 참조 검증을 적용하고 경로를 재사용하지 않는다. 이미 없음과 권한·통신 오류를 구분하며 후자를 성공 처리하지 않는다. 선점이 끝난 작업자의 늦은 결과도 새로운 선점을 변경하지 못하게 한다.
 - [ ] Step 4: Edge Function은 `x-cleanup-secret`을 검증하고 누락·오류면 DB 호출 전에 401을 반환한다. 사용자 정의 비밀은 `CLEANUP_WORKER_SECRET`으로 둔다. 서버 SDK는 기본 제공 `SUPABASE_URL`과 `JSON.parse(Deno.env.get('SUPABASE_SECRET_KEYS')!)["default"]`를 사용하며, 누락 시 비밀 값을 출력하지 않고 설정 오류로 종료한다. 로컬 CLI가 제공하는 변수도 실제 확인하고 배포 환경과 맞춘다. 사용자 정의 변수에 예약 접두사 `SUPABASE_`를 붙이지 않는다. [현재 공식 환경 변수 문서](https://supabase.com/docs/guides/functions/secrets)를 따른다. 독립 인증을 쓰는 이 함수에만 verify_jwt=false를 적용한다. 작업자 RPC의 EXECUTE는 서버 역할에만 허용한다.
@@ -249,6 +261,7 @@ expect(afterLateResponse.entries.some(entry => entry.id === deletedId)).toBe(fal
 expect(buffered.entries).toEqual(previous.entries)
 expect(buffered.pendingNewCount).toBe(1)
 ```
+
 - [ ] Step 2: entries를 publication에 추가하고 미디어만 바꿔도 entries의 version·updated_at이 갱신되는지 확인한다. 실제 익명 세션으로 공개 SELECT RLS·GRANT를 확인한다. 획 JSON과 내부 큐는 publication에 넣지 않는다.
 - [ ] Step 3: 최초 구독 시작 후 조회와 SUBSCRIBED 후 재동기화를 조율하고 그 사이 이벤트를 버퍼한다. INSERT/UPDATE는 ID로 전체 카드를 조회하며 DELETE는 old.id로 제거한다. ID별 요청 세대와 version을 사용해 늦은 응답을 버리고, 저장 성공 응답도 같은 반영 경로를 통과시킨다.
 - [ ] Step 4: 재연결·탭 복귀 시 현재 읽은 가장 오래된 커서까지 다시 조회해 삭제·수정을 맞춘다. 첫 20개만 동기화하고 아래쪽을 방치하지 않는다. 열려 있는 편집 초안은 유지한다. 끊김을 표시하고 재연결 시 자동 제출하지 않는다.
@@ -274,6 +287,7 @@ await expect(cardB).toHaveCount(0)
 // mobile_editor_preserves_draft: 네트워크 실패를 표시한 뒤
 await expect(pageA.getByRole('textbox', {name: '내용'})).toHaveValue('보존할 내용')
 ```
+
 - [ ] Step 2: 1440px·390×844·320×568에서 피드, 이미지 확대, 모달 스크롤, 키보드 초점, 레이블, 그리는 동안의 스크롤을 확인한다. 시스템 다크 설정에서도 라이트를 유지한다.
 - [ ] Step 3: `npm.cmd run test:unit`, `npm.cmd run test:integration`, `npm.cmd run test:e2e`, `npm.cmd run build`를 실행한다. 실패를 고치고 성공한 검증을 이유 없이 반복하지 않는다. 실제 기기 펜 입력을 못 했다면 미검증으로 기록한다.
 - [ ] Step 4: 선택한 전용 Supabase에 migration·Storage·익명 Auth·Edge Function·Vault·Cron을 적용하고 advisors를 확인한다. 적용 전에 현재 changelog와 CLI help를 읽는다. 실제 대상 ID를 확인하고 calendar-app을 변경하지 않는다.

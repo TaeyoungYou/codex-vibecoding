@@ -1,0 +1,56 @@
+# 현재 맥락
+
+최종 갱신일: 2026-10-14
+
+[GitHub push와 Vercel 자동 배포][git-integration]는 `in progress`다.
+사용자가 명시 요청했다. 방명록 관련 완료 작업과 기록을 동기화하고,
+전용 프로젝트의 Root Directory·Git 연결·실제 자동 배포를 확인한다.
+
+[공개 운영 배포][production]는 `done`이다.
+사용자의 미리보기 확인 후 같은 앱을 Production 환경으로 배포했다.
+Vercel 인증 없는 운영 주소와 실제 두 익명 세션의 주요 연동·파일 정리를 통과했다.
+운영 URL과 배포 안내는 README에 있다. 미리보기 보호와 기존 데이터를 보존했다.
+다음은 주소 공유·필요한 운영 점검과 남은 출시 인수·실기기 검증이다.
+Git 자동 배포 연결·commit·push는 진행하지 않았다.
+
+사용자가 요청한 [Vercel 미리보기 배포][deployment]는 `done`이다.
+Preview Ready와 실제 두 익명 세션·미디어·실시간·파일 정리 검증을 통과했다.
+미리보기 URL과 접근 안내는 README에 있다. Vercel 로그인 보호를 유지한다.
+새 프로젝트의 초기 Production 배포는 제거했고 최종 Preview 1개만 남겼다.
+미리보기 완료 당시 공개 운영 배포·Git 자동 배포 연결·push는 진행하지 않았다.
+다음은 사용자 화면 확인과 기존 전체 인수·실기기 검증 공백의 보완이다.
+
+사용자 요청의 [Supabase 연동 점검](tasks/2026-10-14-supabase-audit.md): `done`.
+실제 API 2개·독립 브라우저 1개·파일 4개 정리와 기존 데이터 보존을 재확인했다.
+주요 연동은 통과했으며 일부 인수 검사가 빠져 있다.
+큐 선점 정렬 차이는 사용자가 등록 순서 FIFO를 선택해 문서 기준 변경으로 해소했다.
+[FIFO 설명 작업](tasks/2026-10-14-cleanup-fifo-docs.md)은 `done`이다.
+제품 코드와 DB 구조는 수정하지 않았다. 다음은 남은 검증 공백의 보완이다.
+아래 연동 완료 기록은 주요 구현 범위이며 전체 출시 인수를 뜻하지 않는다.
+
+Supabase·API·익명 인증 연동 상태: `done`.
+[연동 카드](tasks/2026-10-12-supabase-integration.md)에 구현과 검증을 정리했다.
+전용 realtime-feed에 DB 3개·함수 2개·익명 인증·Storage·Realtime·Cron을 적용했다.
+공개 연결 설정과 작업자 비밀은 Git 제외 환경 파일에만 있다.
+실제 두 세션의 저장·권한·그림 재편집·실시간 복구와 파일 삭제를 확인했다.
+다음은 사용자 화면 확인과 필요한 작은 보완이다. 차단된 작업은 없다.
+아래 지침·샘플 UI 내용은 완료된 이전 작업 이력이다.
+
+이전 요청은 `AGENTS.md`의 문서 참조와 기능 수정·구현 전 메모리 우선 절차였다.
+상태: `done`. [지침 작업 카드](tasks/2026-10-12-memory-first-project-guidance.md)
+프로젝트 지침과 스킬의 읽기 순서를 맞추고 문서 검사를 통과했다.
+앞으로 기능 수정·구현 전 스킬 → 메모리 6개 → 관련 카드 → 기준 문서 순서로 읽는다.
+
+직전 작업에서 사용자가 `guestbook-memory-bank`를 호출하며 UI 구현을 요청했다.
+승인된 B안의 중앙 단일 열·흑백 라이트 테마를 기준으로 샘플 UI를 구현한다.
+React·TypeScript·Vite·Tailwind·shadcn/Radix 기반 샘플 UI를 구현했다.
+글·이미지·그림 작성과 수정·삭제, 첨부 확대, 미저장 변경 확인이 현재 탭에서 동작한다.
+
+샘플 UI 상태: `done`. [작업 카드](tasks/2026-10-12-sample-guestbook-ui.md)
+개발 화면은 `http://127.0.0.1:5173`이다. 서버가 종료됐으면 `npm.cmd run dev`로 실행한다.
+당시에는 Vercel도 미검증이었으나 이번 미리보기의 주요 검증은 통과했다.
+실기기 펜·모바일 키보드·화면 읽기 프로그램은 여전히 미검증이다.
+
+[deployment]: tasks/2026-10-14-vercel-preview-deployment.md
+[production]: tasks/2026-10-14-vercel-production-deployment.md
+[git-integration]: tasks/2026-10-14-github-vercel-integration.md
