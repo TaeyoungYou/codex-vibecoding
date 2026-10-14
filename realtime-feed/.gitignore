@@ -3,7 +3,6 @@ dist/
 .vercel/
 .env
 .env.*
-!.env.example
 test-results/
 playwright-report/
 .playwright-mcp/
@@ -12,3 +11,4 @@ playwright-report/
 
 .vercel
 .env*
+!.env.example
