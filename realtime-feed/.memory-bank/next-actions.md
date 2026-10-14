@@ -8,7 +8,7 @@
 2. `next`: PRD·기존 메모리의 초기 상태 설명을 과거 시점으로 명확히 정리한다.
 3. `next`: 실기기 펜·모바일 키보드·화면 읽기 프로그램을 별도 검증한다.
 4. `next`: 공개 운영 주소를 공유하고 필요하면 운영 점검을 진행한다.
-5. `next`: Git 자동 배포는 별도 요청 시 저장소 연결·Root Directory·브랜치와 push를 확인한다.
+5. `next`: 다음 변경부터 실제 수정 파일만 선택해 commit·push하고 자동 배포 결과를 확인한다.
 
 [샘플 UI 작업](tasks/2026-10-12-sample-guestbook-ui.md)은 완료했다.
 [메모리 우선 지침](tasks/2026-10-12-memory-first-project-guidance.md)도 완료했다.
@@ -18,6 +18,8 @@
 Preview와 주요 실제 연동을 확인했고 전체 출시 인수 완료와는 구분한다.
 [공개 운영 배포](tasks/2026-10-14-vercel-production-deployment.md)도 완료했다.
 Vercel 인증 없이 접속되는 주소와 실제 주요 연동을 검증했다.
+[GitHub push와 Vercel 자동 배포](tasks/2026-10-14-github-vercel-integration.md)도 완료했다.
+main의 실제 Git 자동 운영 배포와 성공한 commit status를 확인했다.
 [연동 점검](tasks/2026-10-14-supabase-audit.md)은 완료했고 추가 인수 검증은 미착수다.
 [FIFO 설명](tasks/2026-10-14-cleanup-fifo-docs.md)도 완료했다.
 등록 순서 FIFO로 기준을 맞췄으며 정렬 변경 마이그레이션은 필요하지 않다.

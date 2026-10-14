@@ -182,6 +182,32 @@ Markdownlint CLI는 종료 코드 0이지만 최종 요약은 0 files라 처리 
 공개 운영 배포, 전체 7가지 조합·20개 초과 복구·큐 동시성 등의 남은 출시 인수,
 실기기 펜·모바일 키보드·화면 읽기 프로그램·장시간 장애·부하는 미검증이다.
 
+## 2026-10-14 GitHub push와 Vercel 자동 배포
+
+[연결 카드](tasks/2026-10-14-github-vercel-integration.md)에 결과를 정리했다.
+관련 파일 88개를 선택했으며 다른 앱·환경·비밀·브라우저 산출물은 제외했다.
+실제 로컬 연결 값·작업자 비밀·OIDC 값과 credential 패턴 발견은 0개였다.
+메모리 스킬 계획의 기존 줄 끝 공백 한 곳을 제거하고 staged diff 검사를 통과했다.
+`1011005`의 첫 push와 원격 main 일치, 이어 `68b6257`의 기록 push를 확인했다.
+
+- 전용 프로젝트 Root Directory `realtime-feed`, Vite·Node.js 24·빌드·출력: 통과.
+- GitHub 연결과 운영 브랜치 main의 실제 프로젝트 설정 조회: 통과.
+- `68b6257` 자동 배포: source git·GitHub·main·커밋 일치, Production Ready.
+- 전용 GitHub Vercel commit status: success.
+- 고정 운영 주소: Vercel 인증 없이 실제 방명록 화면 확인.
+- 새 공개 브라우저: 목록 RPC 2회 200, 기존 게시물 표시, 런타임 오류 0개.
+- 실제 Git 빌드 JS: 전용 공개 설정 일치. 별도 인증·검증 데이터 생성 없음.
+
+PowerShell stdin으로 전달한 첫 검사에서 한국어 locator가 손상됐다.
+UTF-8 임시 파일로 같은 검사를 실행해 통과했고 앱 코드는 변경하지 않았다.
+문서 8개의 UTF-8·코드 블록·공백과 상대 링크 52개를 검사해 오류 0개였다.
+
+기존 공개 변수와 미리보기 보호·서비스 데이터는 유지했다.
+GitHub 연결은 Vercel 프런트 자동 배포이며 Supabase DB·함수 변경을 자동 적용하지 않는다.
+완료 기록도 마지막 commit·push로 동기화한다.
+제품 코드·DB 변경이 없어 기존 통과한 주요 운영 연동 검사는 반복하지 않았다.
+기존 전체 출시 인수·실기기 검증 공백과 번들 경고는 남아 있다.
+
 ## 2026-10-14 Vercel 공개 운영 배포
 
 [운영 배포 카드](tasks/2026-10-14-vercel-production-deployment.md)에 결과를 기록했다.

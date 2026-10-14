@@ -1,7 +1,7 @@
 # GitHub push와 Vercel 자동 배포 연결
 
 최종 갱신일: 2026-10-14
-상태: `in progress`
+상태: `done`
 적용 범위: 방명록 완료 작업의 GitHub 동기화와 전용 Vercel Git 연결
 
 ## 목표와 근거
@@ -33,7 +33,17 @@ staged diff 검사를 통과한 `1011005`로 첫 push를 완료했고 원격 mai
 전용 Vercel의 Root Directory·Vite·Node.js 24·빌드·출력을 설정했다.
 GitHub 저장소 연결과 운영 브랜치 main을 실제 조회로 확인했다.
 README에 자동 배포 사용 방법과 기존 CLI 절차의 적용 시점을 구분했다.
-다음은 기록 변경을 push해 자동 배포의 커밋·Ready·공개 화면을 확인하는 것이다.
+후속 기록 push `68b6257`로 자동 운영 배포가 생성됐다.
+실제 배포 source는 git, gitSource는 GitHub·main·해당 커밋으로 일치하며 Ready다.
+GitHub의 전용 Vercel commit status도 success를 확인했다.
+고정 운영 주소에서 Vercel 인증 없이 방명록 화면이 열렸다.
+새 브라우저의 공개 API 2회는 200, 기존 게시물 표시·공개 빌드 설정 일치와 런타임 오류 0개를 확인했다.
+완료 기록도 마지막 commit·push로 동기화하고 원격 HEAD 일치를 확인한다.
+
+제품 코드·DB 구조는 변경하지 않았고 앞서 통과한 주요 운영 연동을 반복하지 않았다.
+Git 기반 새 빌드와 공개 화면·API·환경 경계를 별도로 확인한다.
+남은 전체 출시 인수·실기기 검사와 기존 번들 경고는 그대로 구분한다.
+다음부터 main push는 자동 운영 배포, 다른 브랜치는 보호된 미리보기 배포를 사용한다.
 
 [prd]: ../../docs/superpowers/specs/2026-10-11-realtime-guestbook-design.md
 [plan]: ../../docs/superpowers/plans/2026-10-11-realtime-guestbook.md

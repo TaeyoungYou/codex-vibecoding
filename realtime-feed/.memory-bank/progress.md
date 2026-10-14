@@ -14,7 +14,7 @@
 | 실기기·보조 기술 검증 | next | 실제 펜·모바일 키보드·화면 읽기 프로그램 |
 | [Vercel 미리보기 배포][deployment] | done | Preview Ready, 실제 두 세션·화면·파일 3개 정리 검증 |
 | [Vercel 공개 운영 배포][production] | done | 공개 운영 주소·Production Ready, 인증 없는 실제 두 세션 검증 |
-| [GitHub push와 Vercel 자동 배포][git-integration] | in progress | 완료 작업 동기화·전용 Git 연결과 자동 배포 확인 |
+| [GitHub push와 Vercel 자동 배포][git-integration] | done | 관련 작업 push, GitHub main 자동 운영 배포 Ready 확인 |
 
 실행한 검사와 남은 미검증은 [검증 기록](verification-log.md)에 적는다.
 

@@ -2,18 +2,18 @@
 
 최종 갱신일: 2026-10-14
 
-[GitHub push와 Vercel 자동 배포][git-integration]는 `in progress`다.
-사용자가 명시 요청했다. 방명록 관련 완료 작업과 기록을 동기화하고,
-전용 프로젝트의 Root Directory·Git 연결·실제 자동 배포를 확인한다.
-첫 소스 push와 원격 main 일치, Root Directory·Git 저장소·운영 브랜치 연결은 확인했다.
-다음은 실제 자동 배포의 커밋·Ready·공개 화면 검증이다.
+[GitHub push와 Vercel 자동 배포][git-integration]는 `done`이다.
+관련 완료 작업을 GitHub에 올리고 전용 Git 저장소·Root Directory·main을 연결했다.
+main push의 GitHub commit status success와 해당 Git 소스 자동 배포 Ready를 확인했다.
+고정 운영 주소의 공개 방명록 화면도 확인했다. 자세한 사용 방법은 README에 있다.
+다음은 필요한 기능 수정·운영 점검과 남은 출시 인수·실기기 검증이다.
 
 [공개 운영 배포][production]는 `done`이다.
 사용자의 미리보기 확인 후 같은 앱을 Production 환경으로 배포했다.
 Vercel 인증 없는 운영 주소와 실제 두 익명 세션의 주요 연동·파일 정리를 통과했다.
 운영 URL과 배포 안내는 README에 있다. 미리보기 보호와 기존 데이터를 보존했다.
 다음은 주소 공유·필요한 운영 점검과 남은 출시 인수·실기기 검증이다.
-Git 자동 배포 연결·commit·push는 진행하지 않았다.
+운영 배포 완료 당시에는 Git 자동 배포 연결·commit·push를 진행하지 않았다.
 
 사용자가 요청한 [Vercel 미리보기 배포][deployment]는 `done`이다.
 Preview Ready와 실제 두 익명 세션·미디어·실시간·파일 정리 검증을 통과했다.
