@@ -27,6 +27,15 @@ Linux·Node.js 24.19.0·npm 11.9.0·설치된 Chromium으로 확인했다.
 Vercel `/guestbook` rewrite는 소스에 추가했으며 실제 운영 배포는 미검증이다.
 commit·push·외부 배포·실기기·화면 읽기 프로그램 검증은 이번 작업에서 진행하지 않았다.
 
+## 2026-10-14 랜딩페이지 PR
+
+후속 사용자 요청으로 [PR 작업](tasks/2026-10-14-landing-pr.md)을 진행했다.
+최신 origin/main과 기준 HEAD 일치, 관련 파일 22개와 staged diff 검사 통과를 확인했다.
+구현 커밋 `f8bfb65`를 작업 브랜치에 push하고 main 대상 PR #2를 생성·첨부했다.
+GitHub 조회에서 OPEN·초안 아님·MERGEABLE을 확인했다.
+생성 직후 Vercel 자동 미리보기 2개는 pending, 댓글 검사는 success였다.
+코드 변경이 없어 앞서 통과한 앱 검사를 반복하지 않았다. merge는 하지 않았다.
+
 | 날짜 | 환경·검사 | 결과 | 범위 |
 | --- | --- | --- | --- |
 | 2026-10-12 | PowerShell: 시작 상태 | 통과 | 제품 코드·package.json 없음 확인 |
