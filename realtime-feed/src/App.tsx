@@ -187,7 +187,7 @@ export default function App() {
       </a>
       <header className="Guestbook__Header">
         <div className="Guestbook__HeaderInner">
-          <a href="#" className="Guestbook__Brand" aria-label="방명록 처음으로">
+          <a href="/" className="Guestbook__Brand" aria-label="방명록 소개로">
             <span className="Guestbook__BrandMark">
               <NotebookPen size={20} aria-hidden="true" />
             </span>

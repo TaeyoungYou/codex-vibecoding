@@ -2,6 +2,13 @@
 
 최종 갱신일: 2026-10-14
 
+[랜딩페이지](tasks/2026-10-14-landing-page.md)는 `done`이다.
+`/`에 소개·표현 미리보기·이용 방법·FAQ를 추가하고 `/guestbook`으로 연결했다.
+소개용 예시는 실제 피드와 분리하며 소개에서는 인증·API 요청을 시작하지 않는다.
+빌드·단위 22개·E2E 4개, 8개 화면 폭과 키보드·경로 이동을 확인했다.
+Vercel 직접 진입 rewrite를 추가했으며 commit·push·이번 변경 배포는 하지 않았다.
+다음은 사용자 화면 확인과 필요 시 운영 반영이다. 기존 인수 공백은 유지한다.
+
 [GitHub push와 Vercel 자동 배포][git-integration]는 `done`이다.
 관련 완료 작업을 GitHub에 올리고 전용 Git 저장소·Root Directory·main을 연결했다.
 main push의 GitHub commit status success와 해당 Git 소스 자동 배포 Ready를 확인했다.

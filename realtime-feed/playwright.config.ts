@@ -7,9 +7,12 @@ export default defineConfig({
     baseURL: "http://127.0.0.1:5180",
     headless: true,
     trace: "retain-on-failure",
+    launchOptions: process.env.PLAYWRIGHT_CHROMIUM_EXECUTABLE_PATH
+      ? { executablePath: process.env.PLAYWRIGHT_CHROMIUM_EXECUTABLE_PATH }
+      : undefined,
   },
   webServer: {
-    command: "npm.cmd run dev -- --port 5180 --strictPort",
+    command: `${process.platform === "win32" ? "npm.cmd" : "npm"} run dev -- --port 5180 --strictPort`,
     url: "http://127.0.0.1:5180",
     reuseExistingServer: false,
     env: {
