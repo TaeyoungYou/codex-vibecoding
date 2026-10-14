@@ -18,7 +18,7 @@
         <a class="site-header__brand" href="#top" aria-label="AIIC 2026 홈">AIIC 2026</a>
         <nav class="site-header__nav" aria-label="주요 메뉴">
           <a class="site-header__nav-link" href="#speakers">연사 소개</a>
-          <a class="site-header__nav-link" href="#registration">사전 등록</a>
+          <a class="site-header__nav-link" href="#registration">등록 안내</a>
         </nav>
       </div>
     </header>
@@ -30,11 +30,11 @@
           <h1 class="hero__title" id="hero-title">2026 AI Innovators Conference</h1>
           <p class="hero__theme">Beyond Human: The Next Era of Autonomous Agents</p>
           <p class="hero__summary">전 세계 AI 연구자, 개발자, 기업가와 함께 최신 인공지능 기술과 미래의 비전을 나눕니다.</p>
+          <a class="button hero__cta" href="#registration">등록 안내 보기</a>
           <ul class="hero__meta" aria-label="행사 정보">
             <li><strong class="hero__meta-label">일시</strong> <time datetime="2026-11-12">2026.11.12</time> - <time datetime="2026-11-14">11.14</time></li>
             <li><strong class="hero__meta-label">장소</strong> 서울 코엑스 그랜드 볼룸 · 온라인 생중계</li>
           </ul>
-          <a class="button" href="#registration">사전 등록하기</a>
         </div>
       </section>
 
@@ -43,23 +43,12 @@
           <p class="eyebrow">Speakers</p>
           <h2 class="section__title" id="speakers-title">Keynote Speakers</h2>
           <p class="section__intro">컨퍼런스의 기조연설자를 소개합니다. 연사와 발표 주제는 확정되는 대로 공개됩니다.</p>
-          <div class="speakers__grid">
-            <!-- 확정된 연사 사진, 이름, 소속, 발표 주제로 각 카드를 교체하세요. -->
-            <article class="speaker-card">
-              <div class="speaker-card__avatar" aria-hidden="true">PHOTO</div>
-              <h3 class="speaker-card__title">연사 공개 예정</h3>
-              <p class="speaker-card__description">소속 · 발표 주제 추후 안내</p>
-            </article>
-            <article class="speaker-card">
-              <div class="speaker-card__avatar" aria-hidden="true">PHOTO</div>
-              <h3 class="speaker-card__title">연사 공개 예정</h3>
-              <p class="speaker-card__description">소속 · 발표 주제 추후 안내</p>
-            </article>
-            <article class="speaker-card">
-              <div class="speaker-card__avatar" aria-hidden="true">PHOTO</div>
-              <h3 class="speaker-card__title">연사 공개 예정</h3>
-              <p class="speaker-card__description">소속 · 발표 주제 추후 안내</p>
-            </article>
+          <div class="speakers__pending">
+            <span class="speakers__pending-mark" aria-hidden="true">AIIC</span>
+            <div>
+              <h3 class="speakers__pending-title">연사 라인업 공개 예정</h3>
+              <p class="speakers__pending-copy">확정된 연사와 발표 주제는 이곳에서 안내하겠습니다.</p>
+            </div>
           </div>
         </div>
       </section>
@@ -67,31 +56,45 @@
       <section class="section registration" id="registration" aria-labelledby="registration-title">
         <div class="container registration__inner">
           <p class="eyebrow">Registration</p>
-          <h2 class="section__title" id="registration-title">Reserve Your Seat</h2>
-          <p class="section__intro">AIIC 2026 참가에 관심이 있으신가요? 아래 정보를 입력해 주세요.</p>
-          <!-- 실제 접수 전에는 제출 API, 개인정보 안내, 동의 절차를 연결해야 합니다. -->
+          <h2 class="section__title" id="registration-title">사전 등록 준비 중</h2>
+          <p class="section__intro">등록 접수는 아직 시작되지 않았습니다. 아래 양식은 미리보기이며 현재 정보를 입력하거나 제출할 수 없습니다.</p>
           <form class="registration__form" id="registration-form">
-            <div class="form-field">
-              <label class="form-field__label" for="full-name">이름 <span aria-hidden="true">*</span></label>
-              <input class="form-field__input" id="full-name" name="fullName" type="text" autocomplete="name" required />
-            </div>
-            <div class="form-field">
-              <label class="form-field__label" for="email">이메일 주소 <span aria-hidden="true">*</span></label>
-              <input class="form-field__input" id="email" name="email" type="email" autocomplete="email" required />
-            </div>
-            <div class="form-field">
-              <label class="form-field__label" for="company">소속 회사명 <span aria-hidden="true">*</span></label>
-              <input class="form-field__input" id="company" name="company" type="text" autocomplete="organization" required />
-            </div>
-            <div class="form-field">
-              <label class="form-field__label" for="job-title">직급 <span aria-hidden="true">*</span></label>
-              <input class="form-field__input" id="job-title" name="jobTitle" type="text" autocomplete="organization-title" required />
-            </div>
-            <div class="registration__actions">
-              <button class="button" type="submit">등록하기</button>
-              <p class="registration__note">* 필수 입력 항목 · 현재 페이지는 기본 시안이며 등록 접수는 아직 연결되지 않았습니다.</p>
-              <p class="registration__status" id="form-status" role="status" aria-live="polite"></p>
-            </div>
+            <fieldset class="registration__fieldset" disabled>
+              <div class="form-field">
+                <label class="form-field__label" for="full-name">이름 <span aria-hidden="true">*</span></label>
+                <input class="form-field__input" id="full-name" name="fullName" type="text" autocomplete="name" required />
+              </div>
+              <div class="form-field">
+                <label class="form-field__label" for="email">이메일 주소 <span aria-hidden="true">*</span></label>
+                <input class="form-field__input" id="email" name="email" type="email" autocomplete="email" required />
+              </div>
+              <div class="form-field">
+                <label class="form-field__label" for="company">소속 회사명 <span aria-hidden="true">*</span></label>
+                <input class="form-field__input" id="company" name="company" type="text" autocomplete="organization" required />
+              </div>
+              <div class="form-field">
+                <label class="form-field__label" for="job-title">직급 <span aria-hidden="true">*</span></label>
+                <input class="form-field__input" id="job-title" name="jobTitle" type="text" autocomplete="organization-title" required />
+              </div>
+              <div class="form-field form-field--photo">
+                <label class="form-field__label" for="attendee-photo">사진 업로드 (선택)</label>
+                <input class="form-field__input form-field__input--file" id="attendee-photo" name="attendeePhoto" type="file" accept="image/jpeg,image/png,image/webp" aria-describedby="photo-help photo-status" />
+                <p class="form-field__hint" id="photo-help">JPG, PNG, WebP · 최대 5MB · 선택한 사진은 이 페이지에서만 미리 볼 수 있습니다.</p>
+                <img class="form-field__preview" id="photo-preview" alt="선택한 사진 미리보기" hidden />
+                <p class="form-field__status" id="photo-status" role="status" aria-live="polite" hidden></p>
+              </div>
+              <div class="registration__consent">
+                <label class="registration__consent-label" for="registration-consent">
+                  <input class="registration__consent-checkbox" id="registration-consent" name="registrationConsent" type="checkbox" value="agreed" required />
+                  <span>컨퍼런스 등록을 위한 개인정보 수집·이용에 동의합니다. (필수)</span>
+                </label>
+              </div>
+              <div class="registration__actions">
+                <button class="button registration__submit" type="submit">접수 준비 중</button>
+                <p class="registration__status" id="form-status" role="status" aria-live="polite"></p>
+              </div>
+            </fieldset>
+            <p class="registration__note">실제 접수 시작 전 수집 항목·이용 목적·보관 기간과 개인정보처리방침을 안내합니다.</p>
           </form>
         </div>
       </section>
@@ -100,19 +103,49 @@
     <footer class="site-footer">
       <div class="container site-footer__inner">
         <p class="site-footer__copyright">© 2026 AI Innovators Conference. All rights reserved.</p>
-        <!-- 공식 계정 및 법적 문서 URL이 확정되면 링크로 교체하세요. -->
-        <ul class="site-footer__links" aria-label="추가 정보">
-          <li><span class="site-footer__pending-link">Twitter</span></li>
-          <li><span class="site-footer__pending-link">LinkedIn</span></li>
-          <li><span class="site-footer__pending-link">GitHub</span></li>
-          <li><span class="site-footer__pending-link">개인정보처리방침</span></li>
-          <li><span class="site-footer__pending-link">이용약관</span></li>
-        </ul>
+        <p class="site-footer__note">공식 채널과 운영 정책은 확정 후 안내합니다.</p>
       </div>
     </footer>
 
     <script>
       const registrationForm = document.querySelector("#registration-form");
+      const photoInput = document.querySelector("#attendee-photo");
+      const photoPreview = document.querySelector("#photo-preview");
+      const photoStatus = document.querySelector("#photo-status");
+      const acceptedPhotoTypes = ["image/jpeg", "image/png", "image/webp"];
+      const maxPhotoSize = 5 * 1024 * 1024;
+      let photoPreviewUrl;
+
+      photoInput.addEventListener("change", () => {
+        if (photoPreviewUrl) {
+          URL.revokeObjectURL(photoPreviewUrl);
+          photoPreviewUrl = undefined;
+        }
+
+        photoPreview.removeAttribute("src");
+        photoPreview.hidden = true;
+        photoStatus.textContent = "";
+        photoStatus.hidden = true;
+        photoStatus.classList.remove("form-field__status--error");
+
+        const photo = photoInput.files[0];
+        if (!photo) return;
+
+        if (!acceptedPhotoTypes.includes(photo.type) || photo.size > maxPhotoSize) {
+          photoInput.value = "";
+          photoStatus.textContent = "JPG, PNG, WebP 형식의 5MB 이하 사진을 선택해 주세요.";
+          photoStatus.hidden = false;
+          photoStatus.classList.add("form-field__status--error");
+          return;
+        }
+
+        photoPreviewUrl = URL.createObjectURL(photo);
+        photoPreview.src = photoPreviewUrl;
+        photoPreview.hidden = false;
+        photoStatus.textContent = `${photo.name} 미리보기입니다. 사진은 아직 전송되지 않았습니다.`;
+        photoStatus.hidden = false;
+      });
+
       registrationForm.addEventListener("submit", (event) => {
         event.preventDefault();
         document.querySelector("#form-status").textContent =

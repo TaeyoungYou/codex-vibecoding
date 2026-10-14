@@ -152,11 +152,15 @@ input {
   color: #c3ced6;
 }
 
+.hero__cta {
+  margin-top: .5rem;
+}
+
 .hero__meta {
   display: flex;
   flex-wrap: wrap;
   gap: .5rem 2rem;
-  margin: 2rem 0;
+  margin: 1.5rem 0 0;
   padding: 0;
   list-style: none;
   font-weight: 600;
@@ -182,39 +186,38 @@ input {
   color: var(--color-muted);
 }
 
-.speakers__grid {
-  display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: 1.25rem;
-}
-
-.speaker-card {
-  min-height: 290px;
+.speakers__pending {
+  display: flex;
+  align-items: center;
+  gap: 2rem;
+  min-height: 220px;
   border: 1px solid #29404e;
   border-radius: .7rem;
-  padding: 2rem;
-  background: var(--color-card);
+  padding: clamp(1.5rem, 4vw, 3rem);
+  background: linear-gradient(120deg, #152b38, var(--color-card));
 }
 
-.speaker-card__avatar {
+.speakers__pending-mark {
   display: grid;
   place-items: center;
-  width: 5.5rem;
-  height: 5.5rem;
-  margin-bottom: 1.5rem;
+  flex: 0 0 auto;
+  width: 6rem;
+  height: 6rem;
   border: 1px solid #00d4ff55;
   border-radius: 50%;
   background: #123544;
   color: #9beeff;
-  font-size: .75rem;
+  font-size: .85rem;
+  font-weight: 800;
+  letter-spacing: .12em;
   text-align: center;
 }
 
-.speaker-card__title {
+.speakers__pending-title {
   margin-bottom: .35rem;
 }
 
-.speaker-card__description {
+.speakers__pending-copy {
   margin-bottom: 0;
   color: var(--color-muted);
 }
@@ -228,10 +231,14 @@ input {
   max-width: 760px;
 }
 
-.registration__form {
+.registration__fieldset {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
   gap: 1.25rem;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  opacity: .65;
 }
 
 .form-field {
@@ -256,12 +263,79 @@ input {
   border-color: var(--color-accent);
 }
 
+.form-field--photo {
+  grid-column: 1 / -1;
+}
+
+.form-field__input--file {
+  padding: .65rem;
+  cursor: pointer;
+}
+
+.form-field__input--file::file-selector-button {
+  margin-right: .8rem;
+  border: 0;
+  border-radius: .25rem;
+  padding: .4rem .7rem;
+  background: var(--color-accent);
+  color: #061015;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.form-field__hint,
+.form-field__status {
+  margin: 0;
+  color: var(--color-muted);
+  font-size: .9rem;
+}
+
+.form-field__status--error {
+  color: #ffb1b1;
+}
+
+.form-field__preview {
+  width: 8rem;
+  aspect-ratio: 1;
+  border: 1px solid var(--color-border);
+  border-radius: .5rem;
+  object-fit: cover;
+}
+
+.registration__consent {
+  grid-column: 1 / -1;
+}
+
+.registration__consent-label {
+  display: flex;
+  align-items: flex-start;
+  gap: .7rem;
+  cursor: pointer;
+}
+
+.registration__consent-checkbox {
+  flex: 0 0 auto;
+  width: 1.2rem;
+  height: 1.2rem;
+  margin: .1rem 0 0;
+  accent-color: var(--color-accent);
+}
+
 .registration__actions {
   grid-column: 1 / -1;
 }
 
+.registration__submit:disabled {
+  border-color: #38606d;
+  background: #38606d;
+  color: #d0e2e8;
+  box-shadow: none;
+  cursor: not-allowed;
+  transform: none;
+}
+
 .registration__note {
-  margin: .7rem 0 0;
+  margin: 1.25rem 0 0;
   color: var(--color-muted);
   font-size: .9rem;
 }
@@ -289,38 +363,53 @@ input {
   margin-bottom: 0;
 }
 
-.site-footer__links {
-  display: flex;
-  flex-wrap: wrap;
-  gap: .6rem 1.25rem;
+.site-footer__note {
   margin: 0;
-  padding: 0;
-  list-style: none;
-}
-
-.site-footer__pending-link {
-  color: #81919b;
 }
 
 @media (max-width: 760px) {
   .site-header__inner {
-    align-items: flex-start;
-    flex-direction: column;
-    padding-block: 1rem;
+    min-height: 4rem;
   }
 
   .hero {
-    min-height: 620px;
-    padding-block: 5rem;
+    min-height: 0;
+    padding-block: 3rem;
     background-image:
       linear-gradient(90deg, #0a0a0ae8, #0a0a0a99),
       url("assets/hero-cyberpunk-ai.png");
     background-position: center, 42% center;
   }
 
-  .speakers__grid,
-  .registration__form {
+  .registration__fieldset {
     grid-template-columns: 1fr;
+  }
+
+  .speakers__pending {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+}
+
+@media (max-width: 420px) {
+  .site-header__nav {
+    gap: .7rem;
+  }
+
+  .site-header__nav-link {
+    font-size: .9rem;
+  }
+
+  .hero {
+    padding-block: 2.5rem;
+  }
+
+  .hero__title {
+    font-size: 2.35rem;
+  }
+
+  .hero__theme {
+    font-size: 1.15rem;
   }
 }
 
