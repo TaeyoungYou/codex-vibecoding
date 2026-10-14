@@ -1,7 +1,7 @@
 import { test, expect, type Page } from "@playwright/test";
 
 async function begin(page: Page, name: string) {
-  await page.goto("/");
+  await page.goto("/guestbook");
   await page.getByLabel("닉네임", { exact: true }).fill(name);
   await page.getByRole("button", { name: "이 이름으로 시작하기" }).click();
   await expect(page.locator("#identity-menu")).toContainText(name);

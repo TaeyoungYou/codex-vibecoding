@@ -62,6 +62,11 @@
 | `tests/unit/`, `tests/integration/`, `tests/e2e/` | 순수 로직·컴포넌트, 실제 DB/API, 독립 브라우저 검증 |
 | `.env.example`, `README.md` | 환경 변수 이름, 실행·배포·운영 절차 |
 
+2026-10-14 랜딩페이지 추가: `src/features/landing/`이 서비스 소개와
+소개용 예시를 담당한다. `src/main.tsx`는 `/`에서 소개를 표시하고
+`/guestbook`에서 기존 `App`을 지연 로드한다. 새 라우터 의존성은 추가하지 않는다.
+방명록 API·인증·저장 책임은 기존 파일에 유지하며 E2E 진입 경로를 맞춘다.
+
 공유 타입은 `guestbook.ts`에서 한 번만 정의한다. UUID와 ISO 날짜는 string, 버전은 number다. 공개 Entry는 `id, authorId, nickname, text, version, createdAt, updatedAt, images, drawing`을 가진다. MediaAsset은 `id, url, width, height, bytes`를 가진다. images는 표시 순서의 MediaAsset 배열, drawing은 MediaAsset 또는 null이다. EditEntry는 Entry에 본인만 읽는 `drawingDocument: StrokeDocument | null`을 더한다.
 
 StrokeDocument는 `{formatVersion: 1, width: 900, height: 600, strokes: Stroke[]}`다. Stroke는 `{tool: 'pen' | 'eraser', color: string, widthPx: number, points: {x: number, y: number}[]}`다. 좌표는 0~1, 굵기는 기준 캔버스의 px다. 편집 JSON은 UTF-8 문자열로 보관하여 클라이언트와 DB가 같은 바이트 수를 검증한다.

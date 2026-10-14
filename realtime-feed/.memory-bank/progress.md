@@ -5,6 +5,8 @@
 | 작업 | 상태 | 결과 |
 | --- | --- | --- |
 | 메모리 뱅크 초기화 | done | 기준 문서를 확인하고 기본 노트 6개 생성 |
+| [랜딩페이지](tasks/2026-10-14-landing-page.md) | done | 소개·미리보기·FAQ와 방명록 진입, 빌드·22개 단위·4개 E2E 통과 |
+| [랜딩페이지 PR](tasks/2026-10-14-landing-pr.md) | done | 작업 브랜치 push, main 대상 PR #2 생성·채팅 첨부 |
 | [샘플 방명록 UI](tasks/2026-10-12-sample-guestbook-ui.md) | done | 피드·작성·수정·삭제·이미지·그림과 로컬 UI 검증 완료 |
 | [메모리 우선 지침][guidance] | done | 문서 링크·읽기 순서·검사 완료 |
 | [Supabase·API·익명 인증][integration] | done | 전용 프로젝트 연결, 실제 API·두 브라우저·파일 정리 검증 |

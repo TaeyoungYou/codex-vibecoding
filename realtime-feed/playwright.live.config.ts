@@ -13,7 +13,7 @@ export default defineConfig({
   reporter: "list",
   use: { baseURL: "http://127.0.0.1:5182", headless: true, trace: "off" },
   webServer: {
-    command: "npm.cmd run dev -- --port 5182 --strictPort",
+    command: `${process.platform === "win32" ? "npm.cmd" : "npm"} run dev -- --port 5182 --strictPort`,
     url: "http://127.0.0.1:5182",
     reuseExistingServer: false,
     env: { VITE_GUESTBOOK_MODE: "supabase" },

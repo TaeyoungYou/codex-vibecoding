@@ -2,6 +2,40 @@
 
 최종 갱신일: 2026-10-14
 
+## 2026-10-14 랜딩페이지
+
+Linux·Node.js 24.19.0·npm 11.9.0·설치된 Chromium으로 확인했다.
+[랜딩 카드](tasks/2026-10-14-landing-page.md)에 변경 범위를 기록했다.
+
+- `npm ci --no-audit --no-fund`: 잠금 파일 그대로 의존성 설치 완료.
+- `npm run build`: TypeScript·Vite production 빌드 통과.
+- `npm run test:unit`: 7개 파일·22개 통과.
+- `PLAYWRIGHT_CHROMIUM_EXECUTABLE_PATH=/usr/bin/chromium npm run test:e2e`:
+  기존 방명록 2개와 랜딩 2개, 총 4개 통과.
+- 320·375·390·600·768·820·1,024·1,440px에서 가로 넘침 없음과 이미지 로드 확인.
+- 샘플 모드 브라우저에서 방명록 진입·직접 새로고침·홈 복귀·뒤로 가기 통과.
+- 첫 Tab은 본문 건너뛰기, 모바일 Escape 닫기·버튼 초점,
+  Enter로 미리보기 선택·reduced-motion 비활성화 확인. 런타임 오류 0개.
+- 랜딩 방문과 미리보기 조작 중 인증·피드 API 요청 0개 확인.
+- 초기 새 테스트의 제목 줄바꿈 locator 실패는 조건 정정 후 전체 통과했다.
+  별도 수동 스크립트의 기존 방명록 제목 오기도 정정 후 이동 검증을 통과했다.
+- 코드 형식은 Prettier 3.9.10으로 정리했다.
+- 최종 문서 11개 UTF-8·상대 링크 62개, `git diff --check` 통과.
+  Vercel rewrite JSON 계약·빌드 산출물·스크린샷 Git 제외도 확인했다.
+
+브라우저는 샘플과 합성 응답을 사용했다. 실제 DB·독립 실시간 세션 검사는 반복하지 않았다.
+Vercel `/guestbook` rewrite는 소스에 추가했으며 실제 운영 배포는 미검증이다.
+commit·push·외부 배포·실기기·화면 읽기 프로그램 검증은 이번 작업에서 진행하지 않았다.
+
+## 2026-10-14 랜딩페이지 PR
+
+후속 사용자 요청으로 [PR 작업](tasks/2026-10-14-landing-pr.md)을 진행했다.
+최신 origin/main과 기준 HEAD 일치, 관련 파일 22개와 staged diff 검사 통과를 확인했다.
+구현 커밋 `f8bfb65`를 작업 브랜치에 push하고 main 대상 PR #2를 생성·첨부했다.
+GitHub 조회에서 OPEN·초안 아님·MERGEABLE을 확인했다.
+생성 직후 Vercel 자동 미리보기 2개는 pending, 댓글 검사는 success였다.
+코드 변경이 없어 앞서 통과한 앱 검사를 반복하지 않았다. merge는 하지 않았다.
+
 | 날짜 | 환경·검사 | 결과 | 범위 |
 | --- | --- | --- | --- |
 | 2026-10-12 | PowerShell: 시작 상태 | 통과 | 제품 코드·package.json 없음 확인 |

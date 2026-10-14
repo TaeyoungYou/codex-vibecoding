@@ -159,7 +159,7 @@ test("keeps nickname and draft on failure, prevents duplicate pending saves and 
   page,
 }) => {
   const mock = await backend(page);
-  await page.goto("/");
+  await page.goto("/guestbook");
   const name = page.getByRole("dialog", { name: "어떤 이름으로 남길까요?" });
   await name.getByLabel("닉네임", { exact: true }).fill("테스트방문");
   await name.getByRole("button", { name: "이 이름으로 시작하기" }).click();
@@ -231,7 +231,7 @@ test("keeps the live composer reachable at 320x568 and traps keyboard focus", as
 }) => {
   await backend(page);
   await page.setViewportSize({ width: 320, height: 568 });
-  await page.goto("/");
+  await page.goto("/guestbook");
   const name = page.getByRole("dialog");
   await name.getByRole("button", { name: "나중에" }).click();
   await expect(page.locator("body")).toBeVisible();

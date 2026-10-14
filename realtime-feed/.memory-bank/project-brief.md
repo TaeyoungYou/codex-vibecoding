@@ -12,6 +12,9 @@
 별도 사용자 요청으로 GitHub push와 main 기반 Vercel 자동 운영 배포도 연결했다.
 전체 출시 인수와 실기기 검증은 남아 있다.
 
+2026-10-14 랜딩페이지를 추가했다. `/`는 소개, `/guestbook`은 기존 방명록이다.
+로컬 구현·검증을 완료했고 후속 요청으로 PR #2를 생성했다. 운영 merge는 하지 않았다.
+
 - [프로젝트 지침](../AGENTS.md)
 - [UI 기준](../DESIGN.md)
 - [제품 요구사항](../docs/superpowers/specs/2026-10-11-realtime-guestbook-design.md)
@@ -21,3 +24,4 @@
 - [Vercel 미리보기 배포](tasks/2026-10-14-vercel-preview-deployment.md)
 - [Vercel 공개 운영 배포](tasks/2026-10-14-vercel-production-deployment.md)
 - [GitHub push와 Vercel 자동 배포](tasks/2026-10-14-github-vercel-integration.md)
+- [랜딩페이지](tasks/2026-10-14-landing-page.md)
