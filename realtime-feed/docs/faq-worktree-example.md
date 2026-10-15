@@ -105,6 +105,12 @@ npm.cmd run dev -- --port 5185 --strictPort
 [스크린샷·PR 카드](../.memory-bank/tasks/2026-10-15-faq-screenshots-pr.md)에 기록한다.
 PR merge·운영 배포·DB 변경은 수행하지 않는다.
 
+## 원격 제출
+
+통합 브랜치와 A·B 브랜치를 원격에 보존하고
+[PR #3](https://github.com/TaeyoungYou/codex-vibecoding/pull/3)을 main 대상으로 제출했다.
+PR 본문에는 위 스크린샷 3종을 포함했다.
+
 - [통합 카드](../.memory-bank/tasks/2026-10-15-parallel-faq-worktrees.md)
 - [워크트리 A 카드](../.memory-bank/tasks/2026-10-15-faq-content-worktree.md)
 - [워크트리 B 카드](../.memory-bank/tasks/2026-10-15-faq-category-worktree.md)

@@ -2,14 +2,17 @@
 
 최종 갱신일: 2026-10-15
 
-[FAQ 스크린샷·PR](tasks/2026-10-15-faq-screenshots-pr.md)은 `in progress`다.
-사용자가 완료 결과의 원격 push와 실제 화면 스크린샷을 포함한 PR을 요청했다.
+[FAQ 스크린샷·PR](tasks/2026-10-15-faq-screenshots-pr.md)은 `done`이다.
+실제 데스크톱·첨부 답변·모바일 화면을 확인하고 통합·A·B 브랜치를 push했다.
+[PR #3](https://github.com/TaeyoungYou/codex-vibecoding/pull/3)을 main 대상으로 생성했다.
+본문의 스크린샷 3개는 원격 HTTP 200·image/png를 확인했다.
+다음은 PR 검토·자동 검사 확인이다. merge·운영 배포는 수행하지 않았다.
 
 [FAQ 병렬 워크트리 작업](tasks/2026-10-15-parallel-faq-worktrees.md)은 `done`이다.
 A는 내용 보강, B는 카테고리 필터를 같은 파일에서 독립 구현·커밋했다.
 같은 데이터 영역의 충돌을 해결해 보강 문답 6개와 필터를 통합했다.
 통합 브랜치는 demo/faq-parallel이며 원래 두 워크트리와 브랜치를 보존했다.
-빌드·단위 22개·관련 실제 Chrome E2E 6개를 통과했다. push·운영 배포는 하지 않았다.
+빌드·단위 22개·관련 실제 Chrome E2E 6개를 통과했다. 원격 제출은 위 후속 카드에 있다.
 과정과 커밋 비교는 [실행 예제](../docs/faq-worktree-example.md)에 있다.
 
 [저장소 전체 Git 동기화](tasks/2026-10-15-sync-repository.md)는 `done`이다.
