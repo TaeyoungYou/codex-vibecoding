@@ -44,23 +44,46 @@ const modes = [
   },
 ] as const;
 
-const questions = [
-  [
-    "회원가입이 필요한가요?",
-    "이메일이나 비밀번호 없이 닉네임만 정하면 인사를 남길 수 있어요. 둘러보기만 할 때는 닉네임도 필요하지 않아요.",
-  ],
-  [
-    "내가 남긴 인사를 수정하거나 지울 수 있나요?",
-    "네. 작성한 브라우저의 익명 세션이 유지되는 동안 내 인사를 수정하거나 삭제할 수 있어요. 브라우저의 사이트 데이터를 지우거나 다른 기기로 바꾸면 기존 인사의 변경 권한을 복구할 수 없어요.",
-  ],
-  [
-    "누가 내 인사를 볼 수 있나요?",
-    "방명록은 누구나 둘러볼 수 있는 공개 공간이에요. 글과 사진, 그림도 함께 공개되니 연락처나 개인적인 정보는 남기지 말아주세요.",
-  ],
-  [
-    "글, 사진, 그림을 함께 남길 수 있나요?",
-    "물론이에요. 글·사진·그림 중 하나만 선택하거나 자유롭게 조합할 수 있어요. 사진은 최대 5장, 직접 그린 그림은 인사마다 1개를 담을 수 있어요.",
-  ],
+type FaqCategory = "작성" | "첨부" | "권한";
+type FaqFilter = "전체" | FaqCategory;
+type FaqQuestion = {
+  id: string;
+  category: FaqCategory;
+  question: string;
+  answer: string;
+};
+
+const faqFilters: readonly FaqFilter[] = ["전체", "작성", "첨부", "권한"];
+
+const questions: readonly FaqQuestion[] = [
+  {
+    id: "getting-started",
+    category: "작성",
+    question: "회원가입이 필요한가요?",
+    answer:
+      "이메일이나 비밀번호 없이 닉네임만 정하면 인사를 남길 수 있어요. 둘러보기만 할 때는 닉네임도 필요하지 않아요.",
+  },
+  {
+    id: "edit-permissions",
+    category: "권한",
+    question: "내가 남긴 인사를 수정하거나 지울 수 있나요?",
+    answer:
+      "네. 작성한 브라우저의 익명 세션이 유지되는 동안 내 인사를 수정하거나 삭제할 수 있어요. 브라우저의 사이트 데이터를 지우거나 다른 기기로 바꾸면 기존 인사의 변경 권한을 복구할 수 없어요.",
+  },
+  {
+    id: "public-visibility",
+    category: "권한",
+    question: "누가 내 인사를 볼 수 있나요?",
+    answer:
+      "방명록은 누구나 둘러볼 수 있는 공개 공간이에요. 글과 사진, 그림도 함께 공개되니 연락처나 개인적인 정보는 남기지 말아주세요.",
+  },
+  {
+    id: "content-combinations",
+    category: "첨부",
+    question: "글, 사진, 그림을 함께 남길 수 있나요?",
+    answer:
+      "물론이에요. 글·사진·그림 중 하나만 선택하거나 자유롭게 조합할 수 있어요. 사진은 최대 5장, 직접 그린 그림은 인사마다 1개를 담을 수 있어요.",
+  },
 ];
 
 function Brand() {
@@ -166,7 +189,11 @@ function DrawingPreview({ hero = false }: { hero?: boolean }) {
 export default function LandingPage() {
   const [menuOpen, setMenuOpen] = useState(false);
   const [selected, setSelected] = useState(0);
+  const [faqFilter, setFaqFilter] = useState<FaqFilter>("전체");
   const mode = modes[selected];
+  const filteredQuestions = questions.filter(
+    (item) => faqFilter === "전체" || item.category === faqFilter,
+  );
 
   function closeMenu() {
     setMenuOpen(false);
@@ -475,16 +502,39 @@ export default function LandingPage() {
               hello :)
             </span>
           </div>
-          <div className="Landing__Questions">
-            {questions.map(([question, answer]) => (
-              <details className="Landing__Question" key={question}>
-                <summary>
-                  {question}
-                  <ChevronDown size={19} aria-hidden="true" />
-                </summary>
-                <p>{answer}</p>
-              </details>
-            ))}
+          <div className="Landing__FaqContent">
+            <div
+              className="Landing__FaqFilters"
+              role="group"
+              aria-label="FAQ 카테고리"
+            >
+              {faqFilters.map((filter) => (
+                <button
+                  className={`Landing__FaqFilter${filter === faqFilter ? " Landing__FaqFilter--Active" : ""}`}
+                  type="button"
+                  aria-pressed={filter === faqFilter}
+                  aria-controls="landing-faq-questions"
+                  key={filter}
+                  onClick={() => setFaqFilter(filter)}
+                >
+                  {filter}
+                </button>
+              ))}
+            </div>
+            <p className="Landing__FaqStatus" role="status" aria-atomic="true">
+              {faqFilter} 질문 {filteredQuestions.length}개를 보여드려요.
+            </p>
+            <div className="Landing__Questions" id="landing-faq-questions">
+              {filteredQuestions.map(({ id, question, answer }) => (
+                <details className="Landing__Question" key={id}>
+                  <summary>
+                    {question}
+                    <ChevronDown size={19} aria-hidden="true" />
+                  </summary>
+                  <p>{answer}</p>
+                </details>
+              ))}
+            </div>
           </div>
         </section>
 
