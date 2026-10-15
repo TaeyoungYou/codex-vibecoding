@@ -97,8 +97,13 @@ $env:VITE_GUESTBOOK_MODE = 'sample'
 npm.cmd run dev -- --port 5185 --strictPort
 ```
 
-직접 화면 캡처는 도구 승인 정책으로 실행되지 않아 별도 시각 검수는 미검증이다.
-이 예제는 로컬 브랜치 작업이며 원격 push·운영 배포·DB 변경은 수행하지 않는다.
+초기 통합 때는 도구 승인 정책으로 직접 화면 캡처와 시각 검수를 하지 못했다.
+이후 사용자가 원격 push·스크린샷·PR 생성을 별도로 요청했다.
+새 권한 환경에서 실제 Chrome의 [데스크톱·모바일 3종 캡처](screenshots/faq-parallel/README.md)를
+확인했고 글자 잘림·겹침·가로 넘침이 보이지 않았다.
+원격 제출 상태는
+[스크린샷·PR 카드](../.memory-bank/tasks/2026-10-15-faq-screenshots-pr.md)에 기록한다.
+PR merge·운영 배포·DB 변경은 수행하지 않는다.
 
 - [통합 카드](../.memory-bank/tasks/2026-10-15-parallel-faq-worktrees.md)
 - [워크트리 A 카드](../.memory-bank/tasks/2026-10-15-faq-content-worktree.md)

@@ -2,6 +2,9 @@
 
 최종 갱신일: 2026-10-15
 
+[FAQ 스크린샷·PR](tasks/2026-10-15-faq-screenshots-pr.md)을 진행 중이다.
+실제 화면을 확인하고 통합 브랜치·A·B를 push한 뒤 main 대상 PR을 제출한다.
+
 [FAQ 병렬 워크트리 작업](tasks/2026-10-15-parallel-faq-worktrees.md)은 `done`이다.
 두 브랜치의 커밋을 통합해 보강 질문·필터·반응형을 함께 검증했다.
 `next`: [실행 예제](../docs/faq-worktree-example.md)의 비교 명령으로 변경·충돌 해결을 확인한다.

@@ -2,6 +2,9 @@
 
 최종 갱신일: 2026-10-15
 
+[FAQ 스크린샷·PR](tasks/2026-10-15-faq-screenshots-pr.md)은 `in progress`다.
+사용자가 완료 결과의 원격 push와 실제 화면 스크린샷을 포함한 PR을 요청했다.
+
 [FAQ 병렬 워크트리 작업](tasks/2026-10-15-parallel-faq-worktrees.md)은 `done`이다.
 A는 내용 보강, B는 카테고리 필터를 같은 파일에서 독립 구현·커밋했다.
 같은 데이터 영역의 충돌을 해결해 보강 문답 6개와 필터를 통합했다.
