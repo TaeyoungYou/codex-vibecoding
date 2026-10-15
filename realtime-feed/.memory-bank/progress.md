@@ -4,7 +4,7 @@
 
 | 작업 | 상태 | 결과 |
 | --- | --- | --- |
-| [저장소 전체 Git 동기화](tasks/2026-10-15-sync-repository.md) | in progress | 완료 자산·문서 확인, 원격 main 통합과 push 준비 |
+| [저장소 전체 Git 동기화](tasks/2026-10-15-sync-repository.md) | done | 110개 파일 push, 원격 랜딩페이지 보존·main 해시 일치 확인 |
 | 메모리 뱅크 초기화 | done | 기준 문서를 확인하고 기본 노트 6개 생성 |
 | [랜딩페이지](tasks/2026-10-14-landing-page.md) | done | 소개·미리보기·FAQ와 방명록 진입, 빌드·22개 단위·4개 E2E 통과 |
 | [랜딩페이지 PR](tasks/2026-10-14-landing-pr.md) | done | 작업 브랜치 push, main 대상 PR #2 생성·채팅 첨부 |

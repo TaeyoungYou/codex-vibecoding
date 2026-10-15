@@ -2,8 +2,8 @@
 
 최종 갱신일: 2026-10-15
 
-현재 [저장소 Git 동기화](tasks/2026-10-15-sync-repository.md)는 `in progress`다.
-통합한 main을 push한 뒤 실제 원격 해시 일치를 확인한다.
+[저장소 Git 동기화](tasks/2026-10-15-sync-repository.md)는 `done`이다.
+원격 랜딩페이지를 보존해 통합한 main의 push와 원격 해시 일치를 확인했다.
 
 [랜딩페이지](tasks/2026-10-14-landing-page.md) 구현과 로컬 검증은 `done`이다.
 2026-10-15 fetch에서 [PR #2](https://github.com/TaeyoungYou/codex-vibecoding/pull/2)의
