@@ -2,6 +2,15 @@
 
 최종 갱신일: 2026-10-15
 
+[FAQ 스크린샷·PR](tasks/2026-10-15-faq-screenshots-pr.md)은 `done`이다.
+`next`: [PR #3](https://github.com/TaeyoungYou/codex-vibecoding/pull/3)의
+검토·자동 검사 결과를 확인하고 필요한 보완을 진행한다. merge는 하지 않았다.
+
+[FAQ 병렬 워크트리 작업](tasks/2026-10-15-parallel-faq-worktrees.md)은 `done`이다.
+두 브랜치의 커밋을 통합해 보강 질문·필터·반응형을 함께 검증했다.
+`next`: [실행 예제](../docs/faq-worktree-example.md)의 비교 명령으로 변경·충돌 해결을 확인한다.
+후속 요청의 원격 push·PR 제출은 위 카드에서 완료했다. 운영 반영은 별도 작업이다.
+
 [저장소 Git 동기화](tasks/2026-10-15-sync-repository.md)는 `done`이다.
 원격 랜딩페이지를 보존해 통합한 main의 push와 원격 해시 일치를 확인했다.
 

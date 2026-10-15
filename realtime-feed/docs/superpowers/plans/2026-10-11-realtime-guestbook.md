@@ -67,6 +67,10 @@
 `/guestbook`에서 기존 `App`을 지연 로드한다. 새 라우터 의존성은 추가하지 않는다.
 방명록 API·인증·저장 책임은 기존 파일에 유지하며 E2E 진입 경로를 맞춘다.
 
+2026-10-15 FAQ 병렬 작업은 [별도 워크트리 예제](../../faq-worktree-example.md)를 따른다.
+두 브랜치가 같은 LandingPage.tsx의 문답 데이터를 각각 보강·구조 변경한다.
+통합 담당자가 양쪽 변경을 보존해 병합하고 FAQ 내용·필터·모바일 동작을 함께 검증한다.
+
 공유 타입은 `guestbook.ts`에서 한 번만 정의한다. UUID와 ISO 날짜는 string, 버전은 number다. 공개 Entry는 `id, authorId, nickname, text, version, createdAt, updatedAt, images, drawing`을 가진다. MediaAsset은 `id, url, width, height, bytes`를 가진다. images는 표시 순서의 MediaAsset 배열, drawing은 MediaAsset 또는 null이다. EditEntry는 Entry에 본인만 읽는 `drawingDocument: StrokeDocument | null`을 더한다.
 
 StrokeDocument는 `{formatVersion: 1, width: 900, height: 600, strokes: Stroke[]}`다. Stroke는 `{tool: 'pen' | 'eraser', color: string, widthPx: number, points: {x: number, y: number}[]}`다. 좌표는 0~1, 굵기는 기준 캔버스의 px다. 편집 JSON은 UTF-8 문자열로 보관하여 클라이언트와 DB가 같은 바이트 수를 검증한다.

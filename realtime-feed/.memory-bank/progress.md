@@ -4,6 +4,8 @@
 
 | 작업 | 상태 | 결과 |
 | --- | --- | --- |
+| [FAQ 스크린샷·PR](tasks/2026-10-15-faq-screenshots-pr.md) | done | 실제 캡처 3개·원격 3브랜치 push·스크린샷 포함 PR #3 생성 |
+| [FAQ 병렬 워크트리](tasks/2026-10-15-parallel-faq-worktrees.md) | done | 독립 커밋·실제 충돌 해결, 빌드·22개 단위·6개 E2E 통과 |
 | [저장소 전체 Git 동기화](tasks/2026-10-15-sync-repository.md) | done | 110개 파일 push, 원격 랜딩페이지 보존·main 해시 일치 확인 |
 | 메모리 뱅크 초기화 | done | 기준 문서를 확인하고 기본 노트 6개 생성 |
 | [랜딩페이지](tasks/2026-10-14-landing-page.md) | done | 소개·미리보기·FAQ와 방명록 진입, 빌드·22개 단위·4개 E2E 통과 |
