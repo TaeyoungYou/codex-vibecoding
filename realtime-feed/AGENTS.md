@@ -43,6 +43,12 @@
 2. [UI 디자인 가이드][design]: 색상, 서체, 간격, 컴포넌트, 반응형, 접근성의 기준이다.
 3. [구현 계획][plan]: 작업 순서, 파일 책임, 데이터 계약, 검증 절차를 확인한다.
 
+홍보영상 작업은 [별도 제작 계획][video-plan]을 참고한다.
+2026-10-14 요청은 계획 작성부터이며 현재 이미지 3종과 Remotion을 사용한다.
+영상 구현·렌더는 계획을 확인한 뒤 진행한다.
+이후 사용자가 계획 기반 제작을 요청해 별도 `video/realtime-guestbook-promo/`에 구현했다.
+최종 영상·포스터·실제 검수 기록은 `output/video/`에 있다.
+
 실행 방법과 현재 동작은 [README.md][readme]를 참고한다.
 스킬 작성 당시의 목적과 범위는 [메모리 스킬 작성 계획][memory-plan]을 참고한다.
 현재 스킬 동작은 계획의 예정 상태가 아니라 [실제 스킬 파일][memory-skill]에서 확인한다.
@@ -159,3 +165,4 @@ npm.cmd run test:e2e
 [memory-verification]: .memory-bank/verification-log.md
 [memory-tasks]: .memory-bank/tasks/
 [integration-plan]: docs/superpowers/plans/2026-10-12-guestbook-supabase-integration.md
+[video-plan]: docs/superpowers/plans/2026-10-14-realtime-guestbook-promo-video.md

@@ -1,12 +1,23 @@
 # 다음 행동
 
-최종 갱신일: 2026-10-14
+최종 갱신일: 2026-10-15
+
+현재 [저장소 Git 동기화](tasks/2026-10-15-sync-repository.md)는 `in progress`다.
+통합한 main을 push한 뒤 실제 원격 해시 일치를 확인한다.
 
 [랜딩페이지](tasks/2026-10-14-landing-page.md) 구현과 로컬 검증은 `done`이다.
-`next`: [PR #2](https://github.com/TaeyoungYou/codex-vibecoding/pull/2)의
-검토·자동 검사 결과를 확인하고 필요한 보완·운영 반영을 진행한다.
-[PR 작업](tasks/2026-10-14-landing-pr.md)은 완료했으며 merge는 하지 않았다.
+2026-10-15 fetch에서 [PR #2](https://github.com/TaeyoungYou/codex-vibecoding/pull/2)의
+원격 main 병합을 확인했다. [PR 작업](tasks/2026-10-14-landing-pr.md)은 완료했다.
 실제 운영 경로 검증은 남아 있다.
+
+영상 제작은 `done`이다. [제작 계획][video-plan]에서 실제 납품·검수 결과로 연결한다.
+영상 관련 `next` 후보는 사용자 피드백 수정·실기기와 실제 스피커 확인이다.
+
+이미지 [1·2 수정](tasks/2026-10-14-revise-guestbook-images.md)은 `done`이다.
+히어로와 입력 장면은 실제 웹앱 중심의 v2를 현재 선택으로 사용한다.
+[생성 문서](../docs/image-generation-prompts.md)에 최종 파일·검수 결과를 기록했다.
+이미지 관련 `next` 후보: 사용자 요청 시 최종 자산의 앱 적용을 검토한다.
+기존 운영·출시 인수의 다음 행동은 아래에 보존한다.
 
 1. `next`: 실제 7가지 조합·20개 초과 복구·독립 연결의 큐 동시 선점 검증을 보강한다.
    삭제 후 완료 기록 실패 재처리도 구분해 확인한다.
@@ -29,3 +40,5 @@ main의 실제 Git 자동 운영 배포와 성공한 commit status를 확인했�
 [연동 점검](tasks/2026-10-14-supabase-audit.md)은 완료했고 추가 인수 검증은 미착수다.
 [FIFO 설명](tasks/2026-10-14-cleanup-fifo-docs.md)도 완료했다.
 등록 순서 FIFO로 기준을 맞췄으며 정렬 변경 마이그레이션은 필요하지 않다.
+
+[video-plan]: ../docs/superpowers/plans/2026-10-14-realtime-guestbook-promo-video.md

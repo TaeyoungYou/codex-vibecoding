@@ -1,6 +1,9 @@
 # 현재 맥락
 
-최종 갱신일: 2026-10-14
+최종 갱신일: 2026-10-15
+
+[저장소 전체 Git 동기화](tasks/2026-10-15-sync-repository.md)는 `in progress`다.
+원격 main의 랜딩페이지와 로컬 이미지·영상 기록을 모두 보존해 통합하고 있다.
 
 [랜딩페이지](tasks/2026-10-14-landing-page.md)는 `done`이다.
 `/`에 소개·표현 미리보기·이용 방법·FAQ를 추가하고 `/guestbook`으로 연결했다.
@@ -8,8 +11,26 @@
 빌드·단위 22개·E2E 4개, 8개 화면 폭과 키보드·경로 이동을 확인했다.
 Vercel 직접 진입 rewrite를 추가했다. 후속 요청으로
 [PR #2](https://github.com/TaeyoungYou/codex-vibecoding/pull/2)를 생성했다.
-[PR 작업](tasks/2026-10-14-landing-pr.md)은 `done`이며 merge하지 않았다.
-다음은 PR 검토·자동 검사 확인과 필요 시 운영 반영이다. 기존 인수 공백은 유지한다.
+[PR 작업](tasks/2026-10-14-landing-pr.md)은 `done`이다.
+2026-10-15 fetch에서 PR #2가 원격 main에 병합된 것을 확인했다.
+실제 운영 경로 검증과 기존 인수 공백은 남아 있다.
+
+[홍보영상 제작](tasks/2026-10-14-produce-promo-video.md)은 `done`이다.
+사용자의 계획 기반 제작 요청으로 이미지 3종·Remotion·음악과 효과음을 연결했다.
+30초·1920×1080·30fps·900프레임 MP4와 포스터를 output/video/에 저장했다.
+타입·형식·실제 재생·전체 디코드·18개 프레임과 자산·신호 검사를 통과했다.
+영상 소스는 video/realtime-guestbook-promo/에 있고 Studio는 로컬 5188에서 실행 중이다.
+스피커 청취·실기기·배포는 미검증이며 다음은 필요할 때 영상 피드백 반영이다.
+아래는 이전 이미지·연동·배포 작업의 완료 이력이다.
+
+[이미지 1·2 수정](tasks/2026-10-14-revise-guestbook-images.md)은 `done`이다.
+사용자가 종이 배경·종이 메모 장면의 웹앱 관련성이 약하다고 지적했다.
+실제 카드 3종의 히어로와 실제 작성 모달의 입력 장면을 내장 image_gen으로 만들었다.
+현재 선택은 hero-background-v2.png·leaving-a-note-v2.png이며 시각 검수했다.
+생성 문서를 갱신하고 이전 PNG·프롬프트 기록을 보존했다.
+포트폴리오는 기존 실제 앱 샘플 화면 참조 이미지를 사용한다.
+운영 데이터·앱 코드는 변경하지 않았으며 앱에 이미지 적용은 별도 작업이다.
+아래는 이전 연동·배포·Git 작업의 완료 이력이다.
 
 [GitHub push와 Vercel 자동 배포][git-integration]는 `done`이다.
 관련 완료 작업을 GitHub에 올리고 전용 Git 저장소·Root Directory·main을 연결했다.

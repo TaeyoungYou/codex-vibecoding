@@ -1,0 +1,32 @@
+{
+  "name": "realtime-guestbook-promo",
+  "version": "1.0.0",
+  "description": "30-second Realtime Guestbook promotional film",
+  "repository": {},
+  "license": "UNLICENSED",
+  "private": true,
+  "dependencies": {
+    "@remotion/cli": "4.0.535",
+    "@remotion/fonts": "4.0.535",
+    "@remotion/media": "4.0.535",
+    "@remotion/transitions": "4.0.535",
+    "react": "19.2.3",
+    "react-dom": "19.2.3",
+    "remotion": "4.0.535"
+  },
+  "devDependencies": {
+    "@types/react": "19.2.7",
+    "@types/web": "0.0.166",
+    "prettier": "3.8.1",
+    "typescript": "5.9.3"
+  },
+  "scripts": {
+    "dev": "remotion studio --no-open --port 5188",
+    "build": "remotion bundle",
+    "upgrade": "remotion upgrade",
+    "typecheck": "tsc --noEmit",
+    "format:check": "prettier src remotion.config.ts --check",
+    "render": "remotion render src/index.ts RealtimeGuestbookPromo ../../output/video/realtime-guestbook-promo.mp4 --codec=h264 --audio-codec=aac --pixel-format=yuv420p --crf=16 --overwrite=false",
+    "poster": "remotion still src/index.ts RealtimeGuestbookPromo ../../output/video/realtime-guestbook-promo-poster.png --frame=825 --overwrite=false"
+  }
+}

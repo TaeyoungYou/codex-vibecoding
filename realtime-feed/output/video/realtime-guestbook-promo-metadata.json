@@ -1,0 +1,56 @@
+{
+  "metadata": {
+    "programs": [],
+    "stream_groups": [],
+    "streams": [
+      {
+        "codec_name": "h264",
+        "width": 1920,
+        "height": 1080,
+        "pix_fmt": "yuv420p",
+        "r_frame_rate": "30/1",
+        "duration": "30.000000",
+        "nb_frames": "900",
+        "nb_read_frames": "900"
+      },
+      {
+        "codec_name": "aac",
+        "sample_rate": "48000",
+        "channels": 2,
+        "r_frame_rate": "0/0",
+        "duration": "30.016000",
+        "nb_frames": "1409",
+        "nb_read_frames": "1407"
+      }
+    ],
+    "format": {
+      "duration": "30.016000",
+      "size": "7526988"
+    }
+  },
+  "decoded_frames_checked": [
+    0,
+    60,
+    119,
+    120,
+    210,
+    299,
+    300,
+    375,
+    449,
+    450,
+    525,
+    599,
+    600,
+    675,
+    749,
+    750,
+    810,
+    899
+  ],
+  "audio_peak_dbfs": -3.61,
+  "audio_rms_dbfs": -17.11,
+  "movie_sha256": "3d4d1fa21186c6f5f848ee355b596c986a77c57dff51f0f514066d4217efe6cc",
+  "assets_match": true,
+  "full_decode": "passed"
+}

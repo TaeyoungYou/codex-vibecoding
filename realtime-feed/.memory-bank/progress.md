@@ -1,9 +1,10 @@
 # 진행 상황
 
-최종 갱신일: 2026-10-14
+최종 갱신일: 2026-10-15
 
 | 작업 | 상태 | 결과 |
 | --- | --- | --- |
+| [저장소 전체 Git 동기화](tasks/2026-10-15-sync-repository.md) | in progress | 완료 자산·문서 확인, 원격 main 통합과 push 준비 |
 | 메모리 뱅크 초기화 | done | 기준 문서를 확인하고 기본 노트 6개 생성 |
 | [랜딩페이지](tasks/2026-10-14-landing-page.md) | done | 소개·미리보기·FAQ와 방명록 진입, 빌드·22개 단위·4개 E2E 통과 |
 | [랜딩페이지 PR](tasks/2026-10-14-landing-pr.md) | done | 작업 브랜치 push, main 대상 PR #2 생성·채팅 첨부 |
@@ -17,6 +18,11 @@
 | [Vercel 미리보기 배포][deployment] | done | Preview Ready, 실제 두 세션·화면·파일 3개 정리 검증 |
 | [Vercel 공개 운영 배포][production] | done | 공개 운영 주소·Production Ready, 인증 없는 실제 두 세션 검증 |
 | [GitHub push와 Vercel 자동 배포][git-integration] | done | 관련 작업 push, GitHub main 자동 운영 배포 Ready 확인 |
+| [이미지 생성 문서][image-prompts] | done | 3종 프롬프트·저장 경로·검수 기준 작성 |
+| [이미지 3종 생성][image-assets] | done | 실제 샘플 화면 참조, PNG 3개 생성·시각 검사·저장 |
+| [이미지 1·2 수정][image-revision] | done | 실제 카드 배경·작성 모달 입력 장면 v2 생성·검수 |
+| [홍보영상 제작 계획][video-plan] | done | 제작자 검토·문서 검사 완료, 사용자 제작 요청 |
+| [홍보영상 제작][video-production] | done | 30초·1080p·30fps MP4·포스터, 실제 재생·디코드·시각 검수 |
 
 실행한 검사와 남은 미검증은 [검증 기록](verification-log.md)에 적는다.
 
@@ -27,3 +33,8 @@
 [deployment]: tasks/2026-10-14-vercel-preview-deployment.md
 [production]: tasks/2026-10-14-vercel-production-deployment.md
 [git-integration]: tasks/2026-10-14-github-vercel-integration.md
+[image-prompts]: tasks/2026-10-14-image-generation-prompts.md
+[image-assets]: tasks/2026-10-14-generate-guestbook-images.md
+[image-revision]: tasks/2026-10-14-revise-guestbook-images.md
+[video-plan]: tasks/2026-10-14-promo-video-plan.md
+[video-production]: tasks/2026-10-14-produce-promo-video.md
