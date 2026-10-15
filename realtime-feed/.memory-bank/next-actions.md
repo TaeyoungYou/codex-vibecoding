@@ -2,8 +2,10 @@
 
 최종 갱신일: 2026-10-15
 
-현재 [FAQ 병렬 워크트리 작업](tasks/2026-10-15-parallel-faq-worktrees.md)을 진행한다.
-두 브랜치의 커밋을 통합해 보강 질문·필터·반응형을 함께 검증한다.
+[FAQ 병렬 워크트리 작업](tasks/2026-10-15-parallel-faq-worktrees.md)은 `done`이다.
+두 브랜치의 커밋을 통합해 보강 질문·필터·반응형을 함께 검증했다.
+`next`: [실행 예제](../docs/faq-worktree-example.md)의 비교 명령으로 변경·충돌 해결을 확인한다.
+원격 push·PR·운영 반영은 필요할 때 별도 요청으로 진행한다.
 
 [저장소 Git 동기화](tasks/2026-10-15-sync-repository.md)는 `done`이다.
 원격 랜딩페이지를 보존해 통합한 main의 push와 원격 해시 일치를 확인했다.
