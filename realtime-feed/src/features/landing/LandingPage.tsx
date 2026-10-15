@@ -44,31 +44,60 @@ const modes = [
   },
 ] as const;
 
-const questions = [
-  [
-    "회원가입이 필요한가요?",
-    "이메일이나 비밀번호 없이 닉네임만 정하면 인사를 남길 수 있어요. 닉네임은 2~16자로 정해주세요. 인사를 읽거나 사진·그림을 둘러보기만 할 때는 닉네임도 필요하지 않아요.",
-  ],
-  [
-    "내가 남긴 인사를 수정하거나 지울 수 있나요?",
-    "네. 작성한 브라우저의 익명 세션이 유지되는 동안 내 인사의 글·사진·그림을 고치거나 인사를 삭제할 수 있어요. 같은 닉네임을 쓰더라도 다른 세션에서는 변경 권한이 생기지 않아요. 사이트 데이터를 지우거나 다른 브라우저·기기로 바꾸면 이전 인사의 변경 권한을 복구할 수 없어요.",
-  ],
-  [
-    "누가 내 인사를 볼 수 있나요?",
-    "방명록은 링크를 가진 누구나 읽을 수 있는 공개 공간이에요. 글과 사진, 그림 미리보기도 함께 공개돼요. 연락처나 개인적인 정보는 남기지 말아주세요. 공개된 인사여도 수정과 삭제는 작성한 본인만 할 수 있어요.",
-  ],
-  [
-    "글, 사진, 그림을 함께 남길 수 있나요?",
-    "물론이에요. 글·사진·그림 중 하나만 선택하거나 자유롭게 조합할 수 있어요. 글은 최대 1,000자, 사진은 최대 5장, 직접 그린 그림은 인사마다 1개예요. 세 가지 중 하나 이상은 남겨야 하며, 내용을 모두 지운 빈 인사는 저장할 수 없어요.",
-  ],
-  [
-    "사진은 어떤 형식으로 몇 장까지 올릴 수 있나요?",
-    "JPEG·PNG·WebP 사진을 인사마다 최대 5장 올릴 수 있어요. 원본은 파일당 15 MiB 이하여야 해요. 올리면 자동으로 크기와 용량을 줄여 장당 1 MiB 이하, 사진 합계 5 MiB 이하로 저장해요. 용량을 맞출 수 없는 사진은 안내에 따라 더 작은 파일로 골라주세요.",
-  ],
-  [
-    "저장한 그림을 다시 열어 고칠 수 있나요?",
-    "네. 작성한 브라우저의 익명 세션이 유지되고 있다면 내 인사의 수정 창에서 ‘다시 그리기’를 눌러 저장한 그림을 이어 그리거나 지울 수 있어요. ‘그림 완료’를 누른 뒤 인사의 ‘수정하기’까지 마쳐야 변경 내용이 저장돼요. 그림 1개는 사진 최대 5장과 별도로 담을 수 있어요.",
-  ],
+type FaqCategory = "작성" | "첨부" | "권한";
+type FaqFilter = "전체" | FaqCategory;
+type FaqQuestion = {
+  id: string;
+  category: FaqCategory;
+  question: string;
+  answer: string;
+};
+
+const faqFilters: readonly FaqFilter[] = ["전체", "작성", "첨부", "권한"];
+
+const questions: readonly FaqQuestion[] = [
+  {
+    id: "getting-started",
+    category: "작성",
+    question: "회원가입이 필요한가요?",
+    answer:
+      "이메일이나 비밀번호 없이 닉네임만 정하면 인사를 남길 수 있어요. 닉네임은 2~16자로 정해주세요. 인사를 읽거나 사진·그림을 둘러보기만 할 때는 닉네임도 필요하지 않아요.",
+  },
+  {
+    id: "edit-permissions",
+    category: "권한",
+    question: "내가 남긴 인사를 수정하거나 지울 수 있나요?",
+    answer:
+      "네. 작성한 브라우저의 익명 세션이 유지되는 동안 내 인사의 글·사진·그림을 고치거나 인사를 삭제할 수 있어요. 같은 닉네임을 쓰더라도 다른 세션에서는 변경 권한이 생기지 않아요. 사이트 데이터를 지우거나 다른 브라우저·기기로 바꾸면 이전 인사의 변경 권한을 복구할 수 없어요.",
+  },
+  {
+    id: "public-visibility",
+    category: "권한",
+    question: "누가 내 인사를 볼 수 있나요?",
+    answer:
+      "방명록은 링크를 가진 누구나 읽을 수 있는 공개 공간이에요. 글과 사진, 그림 미리보기도 함께 공개돼요. 연락처나 개인적인 정보는 남기지 말아주세요. 공개된 인사여도 수정과 삭제는 작성한 본인만 할 수 있어요.",
+  },
+  {
+    id: "content-combinations",
+    category: "첨부",
+    question: "글, 사진, 그림을 함께 남길 수 있나요?",
+    answer:
+      "물론이에요. 글·사진·그림 중 하나만 선택하거나 자유롭게 조합할 수 있어요. 글은 최대 1,000자, 사진은 최대 5장, 직접 그린 그림은 인사마다 1개예요. 세 가지 중 하나 이상은 남겨야 하며, 내용을 모두 지운 빈 인사는 저장할 수 없어요.",
+  },
+  {
+    id: "photo-requirements",
+    category: "첨부",
+    question: "사진은 어떤 형식으로 몇 장까지 올릴 수 있나요?",
+    answer:
+      "JPEG·PNG·WebP 사진을 인사마다 최대 5장 올릴 수 있어요. 원본은 파일당 15 MiB 이하여야 해요. 올리면 자동으로 크기와 용량을 줄여 장당 1 MiB 이하, 사진 합계 5 MiB 이하로 저장해요. 용량을 맞출 수 없는 사진은 안내에 따라 더 작은 파일로 골라주세요.",
+  },
+  {
+    id: "drawing-editing",
+    category: "첨부",
+    question: "저장한 그림을 다시 열어 고칠 수 있나요?",
+    answer:
+      "네. 작성한 브라우저의 익명 세션이 유지되고 있다면 내 인사의 수정 창에서 ‘다시 그리기’를 눌러 저장한 그림을 이어 그리거나 지울 수 있어요. ‘그림 완료’를 누른 뒤 인사의 ‘수정하기’까지 마쳐야 변경 내용이 저장돼요. 그림 1개는 사진 최대 5장과 별도로 담을 수 있어요.",
+  },
 ];
 
 function Brand() {
@@ -174,7 +203,11 @@ function DrawingPreview({ hero = false }: { hero?: boolean }) {
 export default function LandingPage() {
   const [menuOpen, setMenuOpen] = useState(false);
   const [selected, setSelected] = useState(0);
+  const [faqFilter, setFaqFilter] = useState<FaqFilter>("전체");
   const mode = modes[selected];
+  const filteredQuestions = questions.filter(
+    (item) => faqFilter === "전체" || item.category === faqFilter,
+  );
 
   function closeMenu() {
     setMenuOpen(false);
@@ -483,16 +516,39 @@ export default function LandingPage() {
               hello :)
             </span>
           </div>
-          <div className="Landing__Questions">
-            {questions.map(([question, answer]) => (
-              <details className="Landing__Question" key={question}>
-                <summary>
-                  {question}
-                  <ChevronDown size={19} aria-hidden="true" />
-                </summary>
-                <p>{answer}</p>
-              </details>
-            ))}
+          <div className="Landing__FaqContent">
+            <div
+              className="Landing__FaqFilters"
+              role="group"
+              aria-label="FAQ 카테고리"
+            >
+              {faqFilters.map((filter) => (
+                <button
+                  className={`Landing__FaqFilter${filter === faqFilter ? " Landing__FaqFilter--Active" : ""}`}
+                  type="button"
+                  aria-pressed={filter === faqFilter}
+                  aria-controls="landing-faq-questions"
+                  key={filter}
+                  onClick={() => setFaqFilter(filter)}
+                >
+                  {filter}
+                </button>
+              ))}
+            </div>
+            <p className="Landing__FaqStatus" role="status" aria-atomic="true">
+              {faqFilter} 질문 {filteredQuestions.length}개를 보여드려요.
+            </p>
+            <div className="Landing__Questions" id="landing-faq-questions">
+              {filteredQuestions.map(({ id, question, answer }) => (
+                <details className="Landing__Question" key={id}>
+                  <summary>
+                    {question}
+                    <ChevronDown size={19} aria-hidden="true" />
+                  </summary>
+                  <p>{answer}</p>
+                </details>
+              ))}
+            </div>
           </div>
         </section>
 
